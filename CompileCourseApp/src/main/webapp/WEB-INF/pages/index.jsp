@@ -1,6 +1,6 @@
 <%-- 
     Document   : index
-    Created on : Jun 4, 2024, 2:46:49 PM
+    Created on : Jun 4, 2024, 3:23:20 PM
     Author     : Huy
 --%>
 
@@ -12,6 +12,6 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <h1>Hello World!</h1>
+        <h1>lùn</h1>
     </body>
 </html>

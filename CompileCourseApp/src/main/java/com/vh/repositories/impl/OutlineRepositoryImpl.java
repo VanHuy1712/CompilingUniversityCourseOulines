@@ -2,17 +2,14 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package com.vh.controllers;
+package com.vh.repositories.impl;
 
-import org.springframework.web.bind.annotation.RequestMapping;
+import com.vh.repositories.OutlineRepository;
 
 /**
  *
  * @author Huy
  */
-public class IndexController {
-    @RequestMapping("/")
-    public String index(){
-        return "index";
-    }
+public class OutlineRepositoryImpl implements OutlineRepository{
+    
 }
