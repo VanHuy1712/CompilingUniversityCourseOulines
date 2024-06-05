@@ -4,15 +4,26 @@
  */
 package com.vh.controllers;
 
+import com.vh.services.OutlineService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
  *
  * @author Huy
  */
+@Controller
+@ControllerAdvice
 public class IndexController {
+    @Autowired
+    private OutlineService outlineService;
+    
     @RequestMapping("/")
-    public String index(){
+    public String index(Model model){
+        model.addAttribute("outlines", this.outlineService.getOutlines());
         return "index";
     }
 }

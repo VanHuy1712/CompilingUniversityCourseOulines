@@ -4,10 +4,13 @@
  */
 package com.vh.repositories;
 
+import com.vh.pojo.Outline;
+import java.util.List;
+
 /**
  *
  * @author Huy
  */
 public interface OutlineRepository {
-    
+    List<Outline> getOutlines();
 }
