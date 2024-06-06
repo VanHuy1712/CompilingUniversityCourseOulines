@@ -4,8 +4,7 @@
  */
 package com.vh.repositories.impl;
 
-import com.vh.pojo.Outline;
-import com.vh.repositories.OutlineRepository;
+import com.vh.pojo.Course;
 import java.util.List;
 import javax.persistence.Query;
 import org.hibernate.Session;
@@ -13,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
+import com.vh.repositories.CourseRepository;
 
 /**
  *
@@ -20,14 +20,14 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @Repository
 @Transactional
-public class OutlineRepositoryImpl implements OutlineRepository{
+public class CourseRepositoryImpl implements CourseRepository{
     @Autowired
     private LocalSessionFactoryBean factory;
     
     @Override
-    public List<Outline> getOutlines() {
+    public List<Course> getCourses() {
         Session s = this.factory.getObject().getCurrentSession();
-        Query q = s.createNamedQuery("Outline.findAll");
+        Query q = s.createNamedQuery("Course.findAll");
         return q.getResultList();
     }
     

@@ -4,25 +4,26 @@
  */
 package com.vh.services.impl;
 
+import com.vh.pojo.Course;
 import com.vh.pojo.Outline;
-import com.vh.repositories.OutlineRepository;
-import com.vh.services.OutlineService;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import com.vh.repositories.CourseRepository;
+import com.vh.services.CourseService;
 
 /**
  *
  * @author Huy
  */
 @Service
-public class OutlineServiceImpl implements OutlineService{
+public class CourseServiceImpl implements CourseService{
     @Autowired
-    private OutlineRepository outlineRepo;
+    private CourseRepository courseRepo;
     
     @Override
-    public List<Outline> getOutlines() {
-        return this.outlineRepo.getOutlines();
+    public List<Course> getCourses() {
+        return this.courseRepo.getCourses();
     }
     
 }

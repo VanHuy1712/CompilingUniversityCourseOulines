@@ -2,8 +2,9 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package com.vh.repositories;
+package com.vh.services;
 
+import com.vh.pojo.Course;
 import com.vh.pojo.Outline;
 import java.util.List;
 
@@ -11,6 +12,6 @@ import java.util.List;
  *
  * @author Huy
  */
-public interface OutlineRepository {
-    List<Outline> getOutlines();
+public interface CourseService {
+    List<Course> getCourses();
 }

@@ -4,12 +4,12 @@
  */
 package com.vh.controllers;
 
-import com.vh.services.OutlineService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.RequestMapping;
+import com.vh.services.CourseService;
 
 /**
  *
@@ -19,11 +19,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @ControllerAdvice
 public class IndexController {
     @Autowired
-    private OutlineService outlineService;
+    private CourseService courseService;
     
     @RequestMapping("/")
     public String index(Model model){
-        model.addAttribute("outlines", this.outlineService.getOutlines());
+        model.addAttribute("courses", this.courseService.getCourses());
         return "index";
     }
 }
