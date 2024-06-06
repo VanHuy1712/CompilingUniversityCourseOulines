@@ -78,7 +78,10 @@ DROP TABLE IF EXISTS `course`;
 CREATE TABLE `course` (
   `id` int NOT NULL AUTO_INCREMENT,
   `name` varchar(45) COLLATE utf8mb4_vietnamese_ci DEFAULT NULL,
-  PRIMARY KEY (`id`)
+  `faculty_id` int DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `fk_course_faculty_idx` (`faculty_id`),
+  CONSTRAINT `fk_course_faculty` FOREIGN KEY (`faculty_id`) REFERENCES `faculty` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_vietnamese_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -115,6 +118,30 @@ LOCK TABLES `evaluation_method` WRITE;
 UNLOCK TABLES;
 
 --
+-- Table structure for table `faculty`
+--
+
+DROP TABLE IF EXISTS `faculty`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `faculty` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `name` varchar(45) COLLATE utf8mb4_vietnamese_ci DEFAULT NULL,
+  `dean` varchar(45) COLLATE utf8mb4_vietnamese_ci DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_vietnamese_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `faculty`
+--
+
+LOCK TABLES `faculty` WRITE;
+/*!40000 ALTER TABLE `faculty` DISABLE KEYS */;
+/*!40000 ALTER TABLE `faculty` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `outline`
 --
 
@@ -123,20 +150,17 @@ DROP TABLE IF EXISTS `outline`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `outline` (
   `id` int NOT NULL AUTO_INCREMENT,
-  `title` varchar(45) COLLATE utf8mb4_vietnamese_ci DEFAULT NULL,
+  `create_date` datetime DEFAULT NULL,
   `language` varchar(45) COLLATE utf8mb4_vietnamese_ci DEFAULT NULL,
   `teching_method` varchar(45) COLLATE utf8mb4_vietnamese_ci DEFAULT NULL,
   `knowledge` varchar(45) COLLATE utf8mb4_vietnamese_ci DEFAULT NULL,
   `credit` float DEFAULT NULL,
   `policy` varchar(45) COLLATE utf8mb4_vietnamese_ci DEFAULT NULL,
   `user_id` int NOT NULL,
-  `academic_term_id` int NOT NULL,
   `course_id` int NOT NULL,
   PRIMARY KEY (`id`),
   KEY `fk_outline_user_idx` (`user_id`),
-  KEY `fk_outline_academic_term1_idx` (`academic_term_id`),
   KEY `fk_outline_course1_idx` (`course_id`),
-  CONSTRAINT `fk_outline_academic_term1` FOREIGN KEY (`academic_term_id`) REFERENCES `academic_term` (`id`),
   CONSTRAINT `fk_outline_course1` FOREIGN KEY (`course_id`) REFERENCES `course` (`id`),
   CONSTRAINT `fk_outline_user` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_vietnamese_ci;
@@ -181,6 +205,34 @@ LOCK TABLES `outline_method` WRITE;
 UNLOCK TABLES;
 
 --
+-- Table structure for table `outline_term`
+--
+
+DROP TABLE IF EXISTS `outline_term`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `outline_term` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `outline_id` int DEFAULT NULL,
+  `academic_id` int DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `fk_outline_detail_idx` (`outline_id`),
+  KEY `fk_term_detail_idx` (`academic_id`),
+  CONSTRAINT `fk_outline_detail` FOREIGN KEY (`outline_id`) REFERENCES `outline` (`id`),
+  CONSTRAINT `fk_term_detail` FOREIGN KEY (`academic_id`) REFERENCES `academic_term` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_vietnamese_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `outline_term`
+--
+
+LOCK TABLES `outline_term` WRITE;
+/*!40000 ALTER TABLE `outline_term` DISABLE KEYS */;
+/*!40000 ALTER TABLE `outline_term` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `user`
 --
 
@@ -220,4 +272,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-06-04 10:10:28
+-- Dump completed on 2024-06-06 18:08:52

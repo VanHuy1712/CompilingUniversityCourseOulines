@@ -5,6 +5,8 @@
 package com.vh.pojo;
 
 import java.io.Serializable;
+import java.util.Collection;
+import java.util.Date;
 import java.util.Set;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
@@ -19,6 +21,8 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
@@ -40,6 +44,12 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Outline.findByCredit", query = "SELECT o FROM Outline o WHERE o.credit = :credit"),
     @NamedQuery(name = "Outline.findByPolicy", query = "SELECT o FROM Outline o WHERE o.policy = :policy")})
 public class Outline implements Serializable {
+
+    @Column(name = "create_date")
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date createDate;
+    @OneToMany(mappedBy = "outlineId")
+    private Collection<OutlineTerm> outlineTermCollection;
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -207,6 +217,23 @@ public class Outline implements Serializable {
     @Override
     public String toString() {
         return "com.vh.pojo.Outline[ id=" + id + " ]";
+    }
+
+    public Date getCreateDate() {
+        return createDate;
+    }
+
+    public void setCreateDate(Date createDate) {
+        this.createDate = createDate;
+    }
+
+    @XmlTransient
+    public Collection<OutlineTerm> getOutlineTermCollection() {
+        return outlineTermCollection;
+    }
+
+    public void setOutlineTermCollection(Collection<OutlineTerm> outlineTermCollection) {
+        this.outlineTermCollection = outlineTermCollection;
     }
     
 }

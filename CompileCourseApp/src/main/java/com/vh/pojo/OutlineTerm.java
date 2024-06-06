@@ -5,9 +5,7 @@
 package com.vh.pojo;
 
 import java.io.Serializable;
-import java.util.Set;
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -17,28 +15,20 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
  * @author Huy
  */
 @Entity
-@Table(name = "course")
+@Table(name = "outline_term")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Course.findAll", query = "SELECT c FROM Course c"),
-    @NamedQuery(name = "Course.findById", query = "SELECT c FROM Course c WHERE c.id = :id"),
-    @NamedQuery(name = "Course.findByName", query = "SELECT c FROM Course c WHERE c.name = :name")})
-public class Course implements Serializable {
-
-    @JoinColumn(name = "faculty_id", referencedColumnName = "id")
-    @ManyToOne
-    private Faculty facultyId;
+    @NamedQuery(name = "OutlineTerm.findAll", query = "SELECT o FROM OutlineTerm o"),
+    @NamedQuery(name = "OutlineTerm.findById", query = "SELECT o FROM OutlineTerm o WHERE o.id = :id")})
+public class OutlineTerm implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -46,16 +36,17 @@ public class Course implements Serializable {
     @Basic(optional = false)
     @Column(name = "id")
     private Integer id;
-    @Size(max = 45)
-    @Column(name = "name")
-    private String name;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "courseId")
-    private Set<Outline> outlineSet;
+    @JoinColumn(name = "academic_id", referencedColumnName = "id")
+    @ManyToOne
+    private AcademicTerm academicId;
+    @JoinColumn(name = "outline_id", referencedColumnName = "id")
+    @ManyToOne
+    private Outline outlineId;
 
-    public Course() {
+    public OutlineTerm() {
     }
 
-    public Course(Integer id) {
+    public OutlineTerm(Integer id) {
         this.id = id;
     }
 
@@ -67,21 +58,20 @@ public class Course implements Serializable {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public AcademicTerm getAcademicId() {
+        return academicId;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setAcademicId(AcademicTerm academicId) {
+        this.academicId = academicId;
     }
 
-    @XmlTransient
-    public Set<Outline> getOutlineSet() {
-        return outlineSet;
+    public Outline getOutlineId() {
+        return outlineId;
     }
 
-    public void setOutlineSet(Set<Outline> outlineSet) {
-        this.outlineSet = outlineSet;
+    public void setOutlineId(Outline outlineId) {
+        this.outlineId = outlineId;
     }
 
     @Override
@@ -94,10 +84,10 @@ public class Course implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Course)) {
+        if (!(object instanceof OutlineTerm)) {
             return false;
         }
-        Course other = (Course) object;
+        OutlineTerm other = (OutlineTerm) object;
         if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
@@ -106,15 +96,7 @@ public class Course implements Serializable {
 
     @Override
     public String toString() {
-        return "com.vh.pojo.Course[ id=" + id + " ]";
-    }
-
-    public Faculty getFacultyId() {
-        return facultyId;
-    }
-
-    public void setFacultyId(Faculty facultyId) {
-        this.facultyId = facultyId;
+        return "com.vh.pojo.OutlineTerm[ id=" + id + " ]";
     }
     
 }

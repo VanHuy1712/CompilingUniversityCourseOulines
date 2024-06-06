@@ -5,6 +5,7 @@
 package com.vh.pojo;
 
 import java.io.Serializable;
+import java.util.Collection;
 import java.util.Date;
 import java.util.Set;
 import javax.persistence.Basic;
@@ -35,6 +36,9 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "AcademicTerm.findById", query = "SELECT a FROM AcademicTerm a WHERE a.id = :id"),
     @NamedQuery(name = "AcademicTerm.findByYearTearm", query = "SELECT a FROM AcademicTerm a WHERE a.yearTearm = :yearTearm")})
 public class AcademicTerm implements Serializable {
+
+    @OneToMany(mappedBy = "academicId")
+    private Collection<OutlineTerm> outlineTermCollection;
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -103,6 +107,15 @@ public class AcademicTerm implements Serializable {
     @Override
     public String toString() {
         return "com.vh.pojo.AcademicTerm[ id=" + id + " ]";
+    }
+
+    @XmlTransient
+    public Collection<OutlineTerm> getOutlineTermCollection() {
+        return outlineTermCollection;
+    }
+
+    public void setOutlineTermCollection(Collection<OutlineTerm> outlineTermCollection) {
+        this.outlineTermCollection = outlineTermCollection;
     }
     
 }

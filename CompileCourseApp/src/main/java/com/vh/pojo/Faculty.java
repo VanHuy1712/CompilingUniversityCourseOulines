@@ -5,16 +5,13 @@
 package com.vh.pojo;
 
 import java.io.Serializable;
-import java.util.Set;
+import java.util.Collection;
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
@@ -28,17 +25,14 @@ import javax.xml.bind.annotation.XmlTransient;
  * @author Huy
  */
 @Entity
-@Table(name = "course")
+@Table(name = "faculty")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Course.findAll", query = "SELECT c FROM Course c"),
-    @NamedQuery(name = "Course.findById", query = "SELECT c FROM Course c WHERE c.id = :id"),
-    @NamedQuery(name = "Course.findByName", query = "SELECT c FROM Course c WHERE c.name = :name")})
-public class Course implements Serializable {
-
-    @JoinColumn(name = "faculty_id", referencedColumnName = "id")
-    @ManyToOne
-    private Faculty facultyId;
+    @NamedQuery(name = "Faculty.findAll", query = "SELECT f FROM Faculty f"),
+    @NamedQuery(name = "Faculty.findById", query = "SELECT f FROM Faculty f WHERE f.id = :id"),
+    @NamedQuery(name = "Faculty.findByName", query = "SELECT f FROM Faculty f WHERE f.name = :name"),
+    @NamedQuery(name = "Faculty.findByDean", query = "SELECT f FROM Faculty f WHERE f.dean = :dean")})
+public class Faculty implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -49,13 +43,16 @@ public class Course implements Serializable {
     @Size(max = 45)
     @Column(name = "name")
     private String name;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "courseId")
-    private Set<Outline> outlineSet;
+    @Size(max = 45)
+    @Column(name = "dean")
+    private String dean;
+    @OneToMany(mappedBy = "facultyId")
+    private Collection<Course> courseCollection;
 
-    public Course() {
+    public Faculty() {
     }
 
-    public Course(Integer id) {
+    public Faculty(Integer id) {
         this.id = id;
     }
 
@@ -75,13 +72,21 @@ public class Course implements Serializable {
         this.name = name;
     }
 
-    @XmlTransient
-    public Set<Outline> getOutlineSet() {
-        return outlineSet;
+    public String getDean() {
+        return dean;
     }
 
-    public void setOutlineSet(Set<Outline> outlineSet) {
-        this.outlineSet = outlineSet;
+    public void setDean(String dean) {
+        this.dean = dean;
+    }
+
+    @XmlTransient
+    public Collection<Course> getCourseCollection() {
+        return courseCollection;
+    }
+
+    public void setCourseCollection(Collection<Course> courseCollection) {
+        this.courseCollection = courseCollection;
     }
 
     @Override
@@ -94,10 +99,10 @@ public class Course implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Course)) {
+        if (!(object instanceof Faculty)) {
             return false;
         }
-        Course other = (Course) object;
+        Faculty other = (Faculty) object;
         if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
@@ -106,15 +111,7 @@ public class Course implements Serializable {
 
     @Override
     public String toString() {
-        return "com.vh.pojo.Course[ id=" + id + " ]";
-    }
-
-    public Faculty getFacultyId() {
-        return facultyId;
-    }
-
-    public void setFacultyId(Faculty facultyId) {
-        this.facultyId = facultyId;
+        return "com.vh.pojo.Faculty[ id=" + id + " ]";
     }
     
 }

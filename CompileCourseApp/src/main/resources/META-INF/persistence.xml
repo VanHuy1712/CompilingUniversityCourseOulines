@@ -9,6 +9,8 @@
     <class>com.vh.pojo.User</class>
     <class>com.vh.pojo.EvaluationMethod</class>
     <class>com.vh.pojo.Course</class>
+    <class>com.vh.pojo.OutlineTerm</class>
+    <class>com.vh.pojo.Faculty</class>
     <exclude-unlisted-classes>false</exclude-unlisted-classes>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/compilecoursedb?zeroDateTimeBehavior=CONVERT_TO_NULL"/>
