@@ -99,14 +99,14 @@ public class OutlineRepositoryImpl implements OutlineRepository{
         return outlines;
     }
 
-    @Override
-    public void addOrUpdate(Outline p) {
-        Session s = this.factory.getObject().getCurrentSession();
-        if (p.getId() != null)
-            s.update(p);
-        else
-            s.save(p);
-    }
+//    @Override
+//    public void addOrUpdate(Outline p) {
+//        Session s = this.factory.getObject().getCurrentSession();
+//        if (p.getId() != null)
+//            s.update(p);
+//        else
+//            s.save(p);
+//    }
 
     @Override
     public Outline getOutlineById(int id) {

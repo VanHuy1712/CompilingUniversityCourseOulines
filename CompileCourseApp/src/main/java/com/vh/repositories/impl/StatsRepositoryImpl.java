@@ -4,9 +4,9 @@
  */
 package com.vh.repositories.impl;
 
-import com.vh.pojo.EvaluationMethod;
+import com.vh.pojo.AcademicTerm;
 import com.vh.pojo.Outline;
-import com.vh.pojo.OutlineMethod;
+import com.vh.pojo.OutlineTerm;
 import com.vh.repositories.StatsRepository;
 import java.util.ArrayList;
 import java.util.List;
@@ -39,12 +39,12 @@ public class StatsRepositoryImpl implements StatsRepository{
         CriteriaQuery<Object[]> q = b.createQuery(Object[].class);
 
         Root rO = q.from(Outline.class);
-        Root rOM = q.from(OutlineMethod.class);
+        Root rOT = q.from(OutlineTerm.class);
 
-        q.multiselect(rO.get("id"), rO.get("name"), b.sum(b.prod(rOM.get("quantity"), rOM.get("unitPrice"))));
+        q.multiselect(rO.get("id"), rO.get("name"), rOT.get("id"));
 
         List<Predicate> predicates = new ArrayList<>();
-        predicates.add(b.equal(rOM.get("outlindeId"), rO.get("id")));
+        predicates.add(b.equal(rOT.get("outlindeId"), rO.get("id")));
 
         q.where(predicates.toArray(Predicate[]::new));
 
@@ -61,17 +61,17 @@ public class StatsRepositoryImpl implements StatsRepository{
         CriteriaBuilder b = s.getCriteriaBuilder();
         CriteriaQuery<Object[]> q = b.createQuery(Object[].class);
 
-        Root rD = q.from(OutlineMethod.class);
-        Root rO = q.from(EvaluationMethod.class);
+        Root rOT = q.from(OutlineTerm.class);
+        Root rAT = q.from(AcademicTerm.class);
 
-        q.multiselect(b.function(period, Integer.class, rO.get("createdDate")), b.sum(b.prod(rD.get("quantity"), rD.get("unitPrice"))));
+        q.multiselect(b.function(period, Integer.class, rAT.get("yearTearm")), rOT.get("id"));
 
         List<Predicate> predicates = new ArrayList<>();
-        predicates.add(b.equal(rD.get("orderId"), rO.get("id")));
-        predicates.add(b.equal(b.function("YEAR", Integer.class, rO.get("createdDate")), year));
+        predicates.add(b.equal(rOT.get("academicId"), rAT.get("id")));
+        predicates.add(b.equal(b.function("YEAR", Integer.class, rAT.get("yearTearm")), year));
 
         q.where(predicates.toArray(Predicate[]::new));
-        q.groupBy(b.function(period, Integer.class, rO.get("createdDate")));
+        q.groupBy(b.function(period, Integer.class, rAT.get("yearTearm")));
 
         Query query = s.createQuery(q);
         return query.getResultList();

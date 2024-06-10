@@ -10,6 +10,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.RequestMapping;
 import com.vh.services.CourseService;
+import com.vh.services.OutlineService;
+import java.util.Map;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestParam;
 
 /**
  *
@@ -18,9 +22,23 @@ import com.vh.services.CourseService;
 @Controller
 @ControllerAdvice
 public class IndexController {
+//    @Autowired
+//    private OutlineService outlineService;
     @Autowired
     private CourseService courseService;
     
+//    @ModelAttribute
+//    public void commonAttr(Model model) {
+//        model.addAttribute("courses", this.courseService.getCourses());
+//    }
+    
+//    @RequestMapping("/")
+//    public String index(Model model,
+//            @RequestParam Map<String, String> params) {
+//        
+//        model.addAttribute("products", this.outlineService.getOutlines(params));
+//        return "index";
+//    }
     @RequestMapping("/")
     public String index(Model model){
         model.addAttribute("courses", this.courseService.getCourses());

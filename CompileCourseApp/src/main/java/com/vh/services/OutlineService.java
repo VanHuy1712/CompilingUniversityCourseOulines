@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package com.vh.repositories;
+package com.vh.services;
 
 import com.vh.pojo.Outline;
 import java.util.List;
@@ -12,7 +12,7 @@ import java.util.Map;
  *
  * @author Huy
  */
-public interface OutlineRepository {
+public interface OutlineService {
     List<Outline> getOutlines(Map<String, String> params);
 //    void addOrUpdate(Outline p);
     Outline getOutlineById(int id);

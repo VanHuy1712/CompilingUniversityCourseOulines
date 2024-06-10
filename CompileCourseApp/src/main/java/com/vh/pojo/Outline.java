@@ -23,9 +23,11 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.Transient;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
+import org.springframework.web.multipart.MultipartFile;
 
 /**
  *
@@ -88,6 +90,8 @@ public class Outline implements Serializable {
     private Set<OutlineMethod> outlineMethodSet;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "outlineId")
     private Set<Comment> commentSet;
+    @Transient
+    private MultipartFile file;
 
     public Outline() {
     }
@@ -234,6 +238,20 @@ public class Outline implements Serializable {
 
     public void setOutlineTermCollection(Collection<OutlineTerm> outlineTermCollection) {
         this.outlineTermCollection = outlineTermCollection;
+    }
+
+    /**
+     * @return the file
+     */
+    public MultipartFile getFile() {
+        return file;
+    }
+
+    /**
+     * @param file the file to set
+     */
+    public void setFile(MultipartFile file) {
+        this.file = file;
     }
     
 }

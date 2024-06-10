@@ -26,9 +26,9 @@
                         <li class="nav-item">
                             <a class="nav-link" href="#">Trang chủ</a>
                         </li>
-                        <c:forEach items="${outlines}" var="c" >
+                        <c:forEach items="${courses}" var="x" >
                             <li class="nav-item">
-                                <a class="nav-link" href="#">${C.name}</a>
+                                <a class="nav-link" href="#">${x.name}</a>
                             </li>
                         </c:forEach>
                     </ul>
