@@ -4,6 +4,7 @@
  */
 package com.vh.controllers;
 
+import com.vh.services.AcademicTermService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.vh.services.CourseService;
 import com.vh.services.OutlineService;
 import com.vh.services.UserService;
+import com.vh.services.OutlineTermService;
 import java.util.Map;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -23,33 +25,35 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller
 @ControllerAdvice
 public class IndexController {
-//    @Autowired
-//    private OutlineService outlineService;
+
     @Autowired
     private CourseService courseService;
     @Autowired
-    private UserService userService;
+//    private UserService userService;
     
 //    @ModelAttribute
 //    public void commonAttr(Model model) {
 //        model.addAttribute("users", this.userService.);
 //    }
+
+    private OutlineService outlineService;
+    @Autowired
+    private OutlineTermService outlineTermService;
+    @Autowired
+    private AcademicTermService academicTermService;
     
 //    @ModelAttribute
-//    public void commonAttr(Model model) {
-//        model.addAttribute("courses", this.courseService.getCourses());
+//    public void commonAttr(Model model){
+//        model.addAttribute("academicterms", this.academicTermService.getAcademicTerms());
 //    }
     
-//    @RequestMapping("/")
-//    public String index(Model model,
-//            @RequestParam Map<String, String> params) {
-//        
-//        model.addAttribute("products", this.outlineService.getOutlines(params));
-//        return "index";
-//    }
     @RequestMapping("/")
-    public String index(Model model){
+    public String index(Model model, @RequestParam Map<String, String> params) {
         model.addAttribute("courses", this.courseService.getCourses());
+        model.addAttribute("outlines", this.outlineService.getOutlines(params));
+        model.addAttribute("outlineTerms", this.outlineTermService.getOutlineTerm());
+        model.addAttribute("academicterms", this.academicTermService.getAcademicTerms());
+
         return "index";
     }
 }

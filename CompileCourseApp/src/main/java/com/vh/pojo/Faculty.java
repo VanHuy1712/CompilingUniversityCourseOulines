@@ -5,7 +5,7 @@
 package com.vh.pojo;
 
 import java.io.Serializable;
-import java.util.Collection;
+import java.util.Set;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -22,7 +22,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author Huy
+ * @author DELL
  */
 @Entity
 @Table(name = "faculty")
@@ -47,7 +47,7 @@ public class Faculty implements Serializable {
     @Column(name = "dean")
     private String dean;
     @OneToMany(mappedBy = "facultyId")
-    private Collection<Course> courseCollection;
+    private Set<Course> courseSet;
 
     public Faculty() {
     }
@@ -81,12 +81,12 @@ public class Faculty implements Serializable {
     }
 
     @XmlTransient
-    public Collection<Course> getCourseCollection() {
-        return courseCollection;
+    public Set<Course> getCourseSet() {
+        return courseSet;
     }
 
-    public void setCourseCollection(Collection<Course> courseCollection) {
-        this.courseCollection = courseCollection;
+    public void setCourseSet(Set<Course> courseSet) {
+        this.courseSet = courseSet;
     }
 
     @Override

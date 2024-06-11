@@ -5,7 +5,7 @@
 package com.vh.pojo;
 
 import java.io.Serializable;
-import java.util.Collection;
+import java.util.Set;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -22,7 +22,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author Huy
+ * @author DELL
  */
 @Entity
 @Table(name = "academic_term")
@@ -43,7 +43,7 @@ public class AcademicTerm implements Serializable {
     @Column(name = "name")
     private String name;
     @OneToMany(mappedBy = "academicId")
-    private Collection<OutlineTerm> outlineTermCollection;
+    private Set<OutlineTerm> outlineTermSet;
 
     public AcademicTerm() {
     }
@@ -67,14 +67,13 @@ public class AcademicTerm implements Serializable {
     public void setName(String name) {
         this.name = name;
     }
-
-    @XmlTransient
-    public Collection<OutlineTerm> getOutlineTermCollection() {
-        return outlineTermCollection;
+    
+    public Set<OutlineTerm> getOutlineTermSet() {
+        return outlineTermSet;
     }
 
-    public void setOutlineTermCollection(Collection<OutlineTerm> outlineTermCollection) {
-        this.outlineTermCollection = outlineTermCollection;
+    public void setOutlineTermSet(Set<OutlineTerm> outlineTermSet) {
+        this.outlineTermSet = outlineTermSet;
     }
 
     @Override

@@ -25,7 +25,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 /**
  *
- * @author Huy
+ * @author DELL
  */
 @Entity
 @Table(name = "user")

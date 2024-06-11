@@ -5,8 +5,8 @@
 package com.vh.pojo;
 
 import java.io.Serializable;
-import java.util.Collection;
 import java.util.Date;
+import java.util.Set;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -15,6 +15,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -28,7 +29,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author Huy
+ * @author DELL
  */
 @Entity
 @Table(name = "outline")
@@ -41,8 +42,7 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Outline.findByLanguage", query = "SELECT o FROM Outline o WHERE o.language = :language"),
     @NamedQuery(name = "Outline.findByTechingMethod", query = "SELECT o FROM Outline o WHERE o.techingMethod = :techingMethod"),
     @NamedQuery(name = "Outline.findByKnowledge", query = "SELECT o FROM Outline o WHERE o.knowledge = :knowledge"),
-    @NamedQuery(name = "Outline.findByCredit", query = "SELECT o FROM Outline o WHERE o.credit = :credit"),
-    @NamedQuery(name = "Outline.findByPolicy", query = "SELECT o FROM Outline o WHERE o.policy = :policy")})
+    @NamedQuery(name = "Outline.findByCredit", query = "SELECT o FROM Outline o WHERE o.credit = :credit")})
 public class Outline implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -69,9 +69,18 @@ public class Outline implements Serializable {
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Column(name = "credit")
     private Float credit;
-    @Size(max = 45)
+    @Lob
+    @Size(max = 65535)
     @Column(name = "policy")
     private String policy;
+    @Lob
+    @Size(max = 65535)
+    @Column(name = "objectives")
+    private String objectives;
+    @Lob
+    @Size(max = 65535)
+    @Column(name = "description")
+    private String description;
     @JoinColumn(name = "course_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private Course courseId;
@@ -79,11 +88,9 @@ public class Outline implements Serializable {
     @ManyToOne(optional = false)
     private User userId;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "outlineId")
-    private Collection<OutlineMethod> outlineMethodCollection;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "outlineId")
-    private Collection<Comment> commentCollection;
+    private Set<Comment> commentSet;
     @OneToMany(mappedBy = "outlineId")
-    private Collection<OutlineTerm> outlineTermCollection;
+    private Set<OutlineTerm> outlineTermSet;
 
     public Outline() {
     }
@@ -98,14 +105,6 @@ public class Outline implements Serializable {
 
     public void setId(Integer id) {
         this.id = id;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
     }
 
     public Date getCreateDate() {
@@ -156,6 +155,22 @@ public class Outline implements Serializable {
         this.policy = policy;
     }
 
+    public String getObjectives() {
+        return objectives;
+    }
+
+    public void setObjectives(String objectives) {
+        this.objectives = objectives;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
     public Course getCourseId() {
         return courseId;
     }
@@ -173,30 +188,12 @@ public class Outline implements Serializable {
     }
 
     @XmlTransient
-    public Collection<OutlineMethod> getOutlineMethodCollection() {
-        return outlineMethodCollection;
+    public Set<OutlineTerm> getOutlineTermSet() {
+        return outlineTermSet;
     }
 
-    public void setOutlineMethodCollection(Collection<OutlineMethod> outlineMethodCollection) {
-        this.outlineMethodCollection = outlineMethodCollection;
-    }
-
-    @XmlTransient
-    public Collection<Comment> getCommentCollection() {
-        return commentCollection;
-    }
-
-    public void setCommentCollection(Collection<Comment> commentCollection) {
-        this.commentCollection = commentCollection;
-    }
-
-    @XmlTransient
-    public Collection<OutlineTerm> getOutlineTermCollection() {
-        return outlineTermCollection;
-    }
-
-    public void setOutlineTermCollection(Collection<OutlineTerm> outlineTermCollection) {
-        this.outlineTermCollection = outlineTermCollection;
+    public void setOutlineTermSet(Set<OutlineTerm> outlineTermSet) {
+        this.outlineTermSet = outlineTermSet;
     }
 
     @Override

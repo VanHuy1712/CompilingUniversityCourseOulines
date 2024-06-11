@@ -5,7 +5,7 @@
 package com.vh.pojo;
 
 import java.io.Serializable;
-import java.util.Collection;
+import java.util.Set;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -25,7 +25,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author Huy
+ * @author DELL
  */
 @Entity
 @Table(name = "course")
@@ -46,7 +46,7 @@ public class Course implements Serializable {
     @Column(name = "name")
     private String name;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "courseId")
-    private Collection<Outline> outlineCollection;
+    private Set<Outline> outlineSet;
     @JoinColumn(name = "faculty_id", referencedColumnName = "id")
     @ManyToOne
     private Faculty facultyId;
@@ -72,15 +72,6 @@ public class Course implements Serializable {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    @XmlTransient
-    public Collection<Outline> getOutlineCollection() {
-        return outlineCollection;
-    }
-
-    public void setOutlineCollection(Collection<Outline> outlineCollection) {
-        this.outlineCollection = outlineCollection;
     }
 
     public Faculty getFacultyId() {

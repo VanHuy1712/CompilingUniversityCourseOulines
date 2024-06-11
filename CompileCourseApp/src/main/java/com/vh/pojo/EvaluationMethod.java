@@ -23,7 +23,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author Huy
+ * @author DELL
  */
 @Entity
 @Table(name = "evaluation_method")
@@ -41,7 +41,7 @@ public class EvaluationMethod implements Serializable {
     @Basic(optional = false)
     @Column(name = "id")
     private Integer id;
-    @Size(max = 15)
+    @Size(max = 45)
     @Column(name = "name")
     private String name;
     @Size(max = 45)
