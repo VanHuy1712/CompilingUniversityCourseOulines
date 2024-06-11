@@ -105,7 +105,6 @@ DROP TABLE IF EXISTS `evaluation_method`;
 CREATE TABLE `evaluation_method` (
   `id` int NOT NULL AUTO_INCREMENT,
   `name` varchar(15) COLLATE utf8mb4_vietnamese_ci DEFAULT NULL,
-  `content` varchar(45) COLLATE utf8mb4_vietnamese_ci DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_vietnamese_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -153,7 +152,6 @@ DROP TABLE IF EXISTS `outline`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `outline` (
   `id` int NOT NULL AUTO_INCREMENT,
-  `title` varchar(45) COLLATE utf8mb4_vietnamese_ci DEFAULT NULL,
   `create_date` datetime DEFAULT NULL,
   `language` varchar(45) COLLATE utf8mb4_vietnamese_ci DEFAULT NULL,
   `teching_method` varchar(45) COLLATE utf8mb4_vietnamese_ci DEFAULT NULL,
@@ -191,6 +189,7 @@ DROP TABLE IF EXISTS `outline_method`;
 CREATE TABLE `outline_method` (
   `id` int NOT NULL AUTO_INCREMENT,
   `weight` double DEFAULT NULL,
+  `name` varchar(45) COLLATE utf8mb4_vietnamese_ci DEFAULT NULL,
   `outline_id` int NOT NULL,
   `evaluation_method_id` int NOT NULL,
   PRIMARY KEY (`id`),
@@ -279,4 +278,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-06-11 22:35:52
+-- Dump completed on 2024-06-11 22:50:36
