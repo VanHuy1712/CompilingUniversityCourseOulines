@@ -77,12 +77,12 @@ DROP TABLE IF EXISTS `course`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `course` (
   `id` int NOT NULL AUTO_INCREMENT,
-  `name` varchar(45) COLLATE utf8mb4_vietnamese_ci DEFAULT NULL,
+  `name` varchar(60) COLLATE utf8mb4_vietnamese_ci DEFAULT NULL,
   `faculty_id` int DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `fk_course_faculty_idx` (`faculty_id`),
   CONSTRAINT `fk_course_faculty` FOREIGN KEY (`faculty_id`) REFERENCES `faculty` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_vietnamese_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_vietnamese_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -91,7 +91,7 @@ CREATE TABLE `course` (
 
 LOCK TABLES `course` WRITE;
 /*!40000 ALTER TABLE `course` DISABLE KEYS */;
-INSERT INTO `course` VALUES (1,'LẬP TRÌNH TRÊN LẬP TRÌNH TRÊN THIẾT',1);
+INSERT INTO `course` VALUES (1,'LẬP TRÌNH TRÊN LẬP TRÌNH TRÊN THIẾT BỊ DI ĐỘNG',1),(2,'MẠNG MÁY TÍNH',1),(3,'CƠ SỞ DỮ LIỆU',1);
 /*!40000 ALTER TABLE `course` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -159,7 +159,9 @@ CREATE TABLE `outline` (
   `teching_method` varchar(45) COLLATE utf8mb4_vietnamese_ci DEFAULT NULL,
   `knowledge` varchar(45) COLLATE utf8mb4_vietnamese_ci DEFAULT NULL,
   `credit` float DEFAULT NULL,
-  `policy` varchar(45) COLLATE utf8mb4_vietnamese_ci DEFAULT NULL,
+  `policy` text COLLATE utf8mb4_vietnamese_ci,
+  `objectives` text COLLATE utf8mb4_vietnamese_ci,
+  `description` text COLLATE utf8mb4_vietnamese_ci,
   `user_id` int NOT NULL,
   `course_id` int NOT NULL,
   PRIMARY KEY (`id`),
@@ -277,4 +279,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-06-10 14:39:49
+-- Dump completed on 2024-06-11 22:35:52
