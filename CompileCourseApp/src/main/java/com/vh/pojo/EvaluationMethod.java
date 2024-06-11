@@ -5,7 +5,7 @@
 package com.vh.pojo;
 
 import java.io.Serializable;
-import java.util.Set;
+import java.util.Collection;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -31,7 +31,8 @@ import javax.xml.bind.annotation.XmlTransient;
 @NamedQueries({
     @NamedQuery(name = "EvaluationMethod.findAll", query = "SELECT e FROM EvaluationMethod e"),
     @NamedQuery(name = "EvaluationMethod.findById", query = "SELECT e FROM EvaluationMethod e WHERE e.id = :id"),
-    @NamedQuery(name = "EvaluationMethod.findByName", query = "SELECT e FROM EvaluationMethod e WHERE e.name = :name")})
+    @NamedQuery(name = "EvaluationMethod.findByName", query = "SELECT e FROM EvaluationMethod e WHERE e.name = :name"),
+    @NamedQuery(name = "EvaluationMethod.findByContent", query = "SELECT e FROM EvaluationMethod e WHERE e.content = :content")})
 public class EvaluationMethod implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -43,8 +44,11 @@ public class EvaluationMethod implements Serializable {
     @Size(max = 15)
     @Column(name = "name")
     private String name;
+    @Size(max = 45)
+    @Column(name = "content")
+    private String content;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "evaluationMethodId")
-    private Set<OutlineMethod> outlineMethodSet;
+    private Collection<OutlineMethod> outlineMethodCollection;
 
     public EvaluationMethod() {
     }
@@ -69,13 +73,21 @@ public class EvaluationMethod implements Serializable {
         this.name = name;
     }
 
-    @XmlTransient
-    public Set<OutlineMethod> getOutlineMethodSet() {
-        return outlineMethodSet;
+    public String getContent() {
+        return content;
     }
 
-    public void setOutlineMethodSet(Set<OutlineMethod> outlineMethodSet) {
-        this.outlineMethodSet = outlineMethodSet;
+    public void setContent(String content) {
+        this.content = content;
+    }
+
+    @XmlTransient
+    public Collection<OutlineMethod> getOutlineMethodCollection() {
+        return outlineMethodCollection;
+    }
+
+    public void setOutlineMethodCollection(Collection<OutlineMethod> outlineMethodCollection) {
+        this.outlineMethodCollection = outlineMethodCollection;
     }
 
     @Override

@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.RequestMapping;
 import com.vh.services.CourseService;
 import com.vh.services.OutlineService;
+import com.vh.services.UserService;
 import java.util.Map;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -26,6 +27,13 @@ public class IndexController {
 //    private OutlineService outlineService;
     @Autowired
     private CourseService courseService;
+    @Autowired
+    private UserService userService;
+    
+//    @ModelAttribute
+//    public void commonAttr(Model model) {
+//        model.addAttribute("users", this.userService.);
+//    }
     
 //    @ModelAttribute
 //    public void commonAttr(Model model) {

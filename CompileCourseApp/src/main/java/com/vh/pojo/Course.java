@@ -5,7 +5,7 @@
 package com.vh.pojo;
 
 import java.io.Serializable;
-import java.util.Set;
+import java.util.Collection;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -36,21 +36,20 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Course.findByName", query = "SELECT c FROM Course c WHERE c.name = :name")})
 public class Course implements Serializable {
 
-    @JoinColumn(name = "faculty_id", referencedColumnName = "id")
-    @ManyToOne
-    private Faculty facultyId;
-
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "id")
     private Integer id;
-    @Size(max = 45)
+    @Size(max = 60)
     @Column(name = "name")
     private String name;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "courseId")
-    private Set<Outline> outlineSet;
+    private Collection<Outline> outlineCollection;
+    @JoinColumn(name = "faculty_id", referencedColumnName = "id")
+    @ManyToOne
+    private Faculty facultyId;
 
     public Course() {
     }
@@ -76,12 +75,20 @@ public class Course implements Serializable {
     }
 
     @XmlTransient
-    public Set<Outline> getOutlineSet() {
-        return outlineSet;
+    public Collection<Outline> getOutlineCollection() {
+        return outlineCollection;
     }
 
-    public void setOutlineSet(Set<Outline> outlineSet) {
-        this.outlineSet = outlineSet;
+    public void setOutlineCollection(Collection<Outline> outlineCollection) {
+        this.outlineCollection = outlineCollection;
+    }
+
+    public Faculty getFacultyId() {
+        return facultyId;
+    }
+
+    public void setFacultyId(Faculty facultyId) {
+        this.facultyId = facultyId;
     }
 
     @Override
@@ -107,14 +114,6 @@ public class Course implements Serializable {
     @Override
     public String toString() {
         return "com.vh.pojo.Course[ id=" + id + " ]";
-    }
-
-    public Faculty getFacultyId() {
-        return facultyId;
-    }
-
-    public void setFacultyId(Faculty facultyId) {
-        this.facultyId = facultyId;
     }
     
 }

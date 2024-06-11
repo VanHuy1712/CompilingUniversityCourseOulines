@@ -6,10 +6,7 @@ package com.vh.pojo;
 
 import java.io.Serializable;
 import java.util.Collection;
-import java.util.Date;
-import java.util.Set;
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -19,8 +16,7 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
+import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
@@ -34,11 +30,8 @@ import javax.xml.bind.annotation.XmlTransient;
 @NamedQueries({
     @NamedQuery(name = "AcademicTerm.findAll", query = "SELECT a FROM AcademicTerm a"),
     @NamedQuery(name = "AcademicTerm.findById", query = "SELECT a FROM AcademicTerm a WHERE a.id = :id"),
-    @NamedQuery(name = "AcademicTerm.findByYearTearm", query = "SELECT a FROM AcademicTerm a WHERE a.yearTearm = :yearTearm")})
+    @NamedQuery(name = "AcademicTerm.findByName", query = "SELECT a FROM AcademicTerm a WHERE a.name = :name")})
 public class AcademicTerm implements Serializable {
-
-    @OneToMany(mappedBy = "academicId")
-    private Collection<OutlineTerm> outlineTermCollection;
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -46,11 +39,11 @@ public class AcademicTerm implements Serializable {
     @Basic(optional = false)
     @Column(name = "id")
     private Integer id;
-    @Column(name = "year_tearm")
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date yearTearm;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "academicTermId")
-    private Set<Outline> outlineSet;
+    @Size(max = 15)
+    @Column(name = "name")
+    private String name;
+    @OneToMany(mappedBy = "academicId")
+    private Collection<OutlineTerm> outlineTermCollection;
 
     public AcademicTerm() {
     }
@@ -67,21 +60,21 @@ public class AcademicTerm implements Serializable {
         this.id = id;
     }
 
-    public Date getYearTearm() {
-        return yearTearm;
+    public String getName() {
+        return name;
     }
 
-    public void setYearTearm(Date yearTearm) {
-        this.yearTearm = yearTearm;
+    public void setName(String name) {
+        this.name = name;
     }
 
     @XmlTransient
-    public Set<Outline> getOutlineSet() {
-        return outlineSet;
+    public Collection<OutlineTerm> getOutlineTermCollection() {
+        return outlineTermCollection;
     }
 
-    public void setOutlineSet(Set<Outline> outlineSet) {
-        this.outlineSet = outlineSet;
+    public void setOutlineTermCollection(Collection<OutlineTerm> outlineTermCollection) {
+        this.outlineTermCollection = outlineTermCollection;
     }
 
     @Override
@@ -107,15 +100,6 @@ public class AcademicTerm implements Serializable {
     @Override
     public String toString() {
         return "com.vh.pojo.AcademicTerm[ id=" + id + " ]";
-    }
-
-    @XmlTransient
-    public Collection<OutlineTerm> getOutlineTermCollection() {
-        return outlineTermCollection;
-    }
-
-    public void setOutlineTermCollection(Collection<OutlineTerm> outlineTermCollection) {
-        this.outlineTermCollection = outlineTermCollection;
     }
     
 }

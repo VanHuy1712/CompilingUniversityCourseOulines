@@ -7,7 +7,6 @@ package com.vh.pojo;
 import java.io.Serializable;
 import java.util.Collection;
 import java.util.Date;
-import java.util.Set;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -23,11 +22,9 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-import javax.persistence.Transient;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
-import org.springframework.web.multipart.MultipartFile;
 
 /**
  *
@@ -40,18 +37,13 @@ import org.springframework.web.multipart.MultipartFile;
     @NamedQuery(name = "Outline.findAll", query = "SELECT o FROM Outline o"),
     @NamedQuery(name = "Outline.findById", query = "SELECT o FROM Outline o WHERE o.id = :id"),
     @NamedQuery(name = "Outline.findByTitle", query = "SELECT o FROM Outline o WHERE o.title = :title"),
+    @NamedQuery(name = "Outline.findByCreateDate", query = "SELECT o FROM Outline o WHERE o.createDate = :createDate"),
     @NamedQuery(name = "Outline.findByLanguage", query = "SELECT o FROM Outline o WHERE o.language = :language"),
     @NamedQuery(name = "Outline.findByTechingMethod", query = "SELECT o FROM Outline o WHERE o.techingMethod = :techingMethod"),
     @NamedQuery(name = "Outline.findByKnowledge", query = "SELECT o FROM Outline o WHERE o.knowledge = :knowledge"),
     @NamedQuery(name = "Outline.findByCredit", query = "SELECT o FROM Outline o WHERE o.credit = :credit"),
     @NamedQuery(name = "Outline.findByPolicy", query = "SELECT o FROM Outline o WHERE o.policy = :policy")})
 public class Outline implements Serializable {
-
-    @Column(name = "create_date")
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date createDate;
-    @OneToMany(mappedBy = "outlineId")
-    private Collection<OutlineTerm> outlineTermCollection;
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -62,6 +54,9 @@ public class Outline implements Serializable {
     @Size(max = 45)
     @Column(name = "title")
     private String title;
+    @Column(name = "create_date")
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date createDate;
     @Size(max = 45)
     @Column(name = "language")
     private String language;
@@ -77,9 +72,6 @@ public class Outline implements Serializable {
     @Size(max = 45)
     @Column(name = "policy")
     private String policy;
-    @JoinColumn(name = "academic_term_id", referencedColumnName = "id")
-    @ManyToOne(optional = false)
-    private AcademicTerm academicTermId;
     @JoinColumn(name = "course_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private Course courseId;
@@ -87,11 +79,11 @@ public class Outline implements Serializable {
     @ManyToOne(optional = false)
     private User userId;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "outlineId")
-    private Set<OutlineMethod> outlineMethodSet;
+    private Collection<OutlineMethod> outlineMethodCollection;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "outlineId")
-    private Set<Comment> commentSet;
-    @Transient
-    private MultipartFile file;
+    private Collection<Comment> commentCollection;
+    @OneToMany(mappedBy = "outlineId")
+    private Collection<OutlineTerm> outlineTermCollection;
 
     public Outline() {
     }
@@ -114,6 +106,14 @@ public class Outline implements Serializable {
 
     public void setTitle(String title) {
         this.title = title;
+    }
+
+    public Date getCreateDate() {
+        return createDate;
+    }
+
+    public void setCreateDate(Date createDate) {
+        this.createDate = createDate;
     }
 
     public String getLanguage() {
@@ -156,14 +156,6 @@ public class Outline implements Serializable {
         this.policy = policy;
     }
 
-    public AcademicTerm getAcademicTermId() {
-        return academicTermId;
-    }
-
-    public void setAcademicTermId(AcademicTerm academicTermId) {
-        this.academicTermId = academicTermId;
-    }
-
     public Course getCourseId() {
         return courseId;
     }
@@ -181,21 +173,30 @@ public class Outline implements Serializable {
     }
 
     @XmlTransient
-    public Set<OutlineMethod> getOutlineMethodSet() {
-        return outlineMethodSet;
+    public Collection<OutlineMethod> getOutlineMethodCollection() {
+        return outlineMethodCollection;
     }
 
-    public void setOutlineMethodSet(Set<OutlineMethod> outlineMethodSet) {
-        this.outlineMethodSet = outlineMethodSet;
+    public void setOutlineMethodCollection(Collection<OutlineMethod> outlineMethodCollection) {
+        this.outlineMethodCollection = outlineMethodCollection;
     }
 
     @XmlTransient
-    public Set<Comment> getCommentSet() {
-        return commentSet;
+    public Collection<Comment> getCommentCollection() {
+        return commentCollection;
     }
 
-    public void setCommentSet(Set<Comment> commentSet) {
-        this.commentSet = commentSet;
+    public void setCommentCollection(Collection<Comment> commentCollection) {
+        this.commentCollection = commentCollection;
+    }
+
+    @XmlTransient
+    public Collection<OutlineTerm> getOutlineTermCollection() {
+        return outlineTermCollection;
+    }
+
+    public void setOutlineTermCollection(Collection<OutlineTerm> outlineTermCollection) {
+        this.outlineTermCollection = outlineTermCollection;
     }
 
     @Override
@@ -221,37 +222,6 @@ public class Outline implements Serializable {
     @Override
     public String toString() {
         return "com.vh.pojo.Outline[ id=" + id + " ]";
-    }
-
-    public Date getCreateDate() {
-        return createDate;
-    }
-
-    public void setCreateDate(Date createDate) {
-        this.createDate = createDate;
-    }
-
-    @XmlTransient
-    public Collection<OutlineTerm> getOutlineTermCollection() {
-        return outlineTermCollection;
-    }
-
-    public void setOutlineTermCollection(Collection<OutlineTerm> outlineTermCollection) {
-        this.outlineTermCollection = outlineTermCollection;
-    }
-
-    /**
-     * @return the file
-     */
-    public MultipartFile getFile() {
-        return file;
-    }
-
-    /**
-     * @param file the file to set
-     */
-    public void setFile(MultipartFile file) {
-        this.file = file;
     }
     
 }

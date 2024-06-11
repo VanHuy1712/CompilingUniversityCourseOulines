@@ -5,7 +5,7 @@
 package com.vh.pojo;
 
 import java.io.Serializable;
-import java.util.Set;
+import java.util.Collection;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -17,9 +17,11 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
+import org.springframework.web.multipart.MultipartFile;
 
 /**
  *
@@ -38,7 +40,7 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "User.findByUsername", query = "SELECT u FROM User u WHERE u.username = :username"),
     @NamedQuery(name = "User.findByPassword", query = "SELECT u FROM User u WHERE u.password = :password"),
     @NamedQuery(name = "User.findByActive", query = "SELECT u FROM User u WHERE u.active = :active"),
-    @NamedQuery(name = "User.findByAvater", query = "SELECT u FROM User u WHERE u.avater = :avater"),
+    @NamedQuery(name = "User.findByAvatar", query = "SELECT u FROM User u WHERE u.avatar = :avatar"),
     @NamedQuery(name = "User.findByUserRole", query = "SELECT u FROM User u WHERE u.userRole = :userRole")})
 public class User implements Serializable {
 
@@ -71,15 +73,18 @@ public class User implements Serializable {
     @Column(name = "active")
     private Boolean active;
     @Size(max = 100)
-    @Column(name = "avater")
-    private String avater;
+    @Column(name = "avatar")
+    private String avatar;
     @Size(max = 10)
     @Column(name = "user_role")
     private String userRole;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "userId")
-    private Set<Outline> outlineSet;
+    private Collection<Outline> outlineCollection;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "userId")
-    private Set<Comment> commentSet;
+    private Collection<Comment> commentCollection;
+    
+    @Transient
+    private MultipartFile file;
 
     public User() {
     }
@@ -152,12 +157,12 @@ public class User implements Serializable {
         this.active = active;
     }
 
-    public String getAvater() {
-        return avater;
+    public String getAvatar() {
+        return avatar;
     }
 
-    public void setAvater(String avater) {
-        this.avater = avater;
+    public void setAvatar(String avatar) {
+        this.avatar = avatar;
     }
 
     public String getUserRole() {
@@ -169,21 +174,21 @@ public class User implements Serializable {
     }
 
     @XmlTransient
-    public Set<Outline> getOutlineSet() {
-        return outlineSet;
+    public Collection<Outline> getOutlineCollection() {
+        return outlineCollection;
     }
 
-    public void setOutlineSet(Set<Outline> outlineSet) {
-        this.outlineSet = outlineSet;
+    public void setOutlineCollection(Collection<Outline> outlineCollection) {
+        this.outlineCollection = outlineCollection;
     }
 
     @XmlTransient
-    public Set<Comment> getCommentSet() {
-        return commentSet;
+    public Collection<Comment> getCommentCollection() {
+        return commentCollection;
     }
 
-    public void setCommentSet(Set<Comment> commentSet) {
-        this.commentSet = commentSet;
+    public void setCommentCollection(Collection<Comment> commentCollection) {
+        this.commentCollection = commentCollection;
     }
 
     @Override
@@ -209,6 +214,18 @@ public class User implements Serializable {
     @Override
     public String toString() {
         return "com.vh.pojo.User[ id=" + id + " ]";
+    }/**
+     * @return the file
+     */
+    public MultipartFile getFile() {
+        return file;
+    }
+
+    /**
+     * @param file the file to set
+     */
+    public void setFile(MultipartFile file) {
+        this.file = file;
     }
     
 }

@@ -64,18 +64,18 @@ public class StatsRepositoryImpl implements StatsRepository{
         Root rOT = q.from(OutlineTerm.class);
         Root rAT = q.from(AcademicTerm.class);
 
-        q.multiselect(b.function(period, Integer.class, rAT.get("yearTearm")), rOT.get("id"));
+        q.multiselect(b.function(period, Integer.class, rOT.get("createdDate")), rAT.get("id"));
 
         List<Predicate> predicates = new ArrayList<>();
         predicates.add(b.equal(rOT.get("academicId"), rAT.get("id")));
-        predicates.add(b.equal(b.function("YEAR", Integer.class, rAT.get("yearTearm")), year));
+        predicates.add(b.equal(b.function("YEAR", Integer.class, rOT.get("createdDate")), year));
 
         q.where(predicates.toArray(Predicate[]::new));
-        q.groupBy(b.function(period, Integer.class, rAT.get("yearTearm")));
+        q.groupBy(b.function(period, Integer.class, rOT.get("createdDate")));
 
         Query query = s.createQuery(q);
         return query.getResultList();
-
+        
     }
     
 }
