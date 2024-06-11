@@ -25,7 +25,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author Huy
+ * @author DELL
  */
 @Entity
 @Table(name = "course")
@@ -35,10 +35,6 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Course.findById", query = "SELECT c FROM Course c WHERE c.id = :id"),
     @NamedQuery(name = "Course.findByName", query = "SELECT c FROM Course c WHERE c.name = :name")})
 public class Course implements Serializable {
-
-    @JoinColumn(name = "faculty_id", referencedColumnName = "id")
-    @ManyToOne
-    private Faculty facultyId;
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -51,6 +47,9 @@ public class Course implements Serializable {
     private String name;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "courseId")
     private Set<Outline> outlineSet;
+    @JoinColumn(name = "faculty_id", referencedColumnName = "id")
+    @ManyToOne
+    private Faculty facultyId;
 
     public Course() {
     }
@@ -84,6 +83,14 @@ public class Course implements Serializable {
         this.outlineSet = outlineSet;
     }
 
+    public Faculty getFacultyId() {
+        return facultyId;
+    }
+
+    public void setFacultyId(Faculty facultyId) {
+        this.facultyId = facultyId;
+    }
+
     @Override
     public int hashCode() {
         int hash = 0;
@@ -107,14 +114,6 @@ public class Course implements Serializable {
     @Override
     public String toString() {
         return "com.vh.pojo.Course[ id=" + id + " ]";
-    }
-
-    public Faculty getFacultyId() {
-        return facultyId;
-    }
-
-    public void setFacultyId(Faculty facultyId) {
-        this.facultyId = facultyId;
     }
     
 }

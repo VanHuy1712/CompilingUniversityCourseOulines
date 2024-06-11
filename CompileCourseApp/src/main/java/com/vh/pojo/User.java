@@ -23,7 +23,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author Huy
+ * @author DELL
  */
 @Entity
 @Table(name = "user")
@@ -38,7 +38,7 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "User.findByUsername", query = "SELECT u FROM User u WHERE u.username = :username"),
     @NamedQuery(name = "User.findByPassword", query = "SELECT u FROM User u WHERE u.password = :password"),
     @NamedQuery(name = "User.findByActive", query = "SELECT u FROM User u WHERE u.active = :active"),
-    @NamedQuery(name = "User.findByAvater", query = "SELECT u FROM User u WHERE u.avater = :avater"),
+    @NamedQuery(name = "User.findByAvatar", query = "SELECT u FROM User u WHERE u.avatar = :avatar"),
     @NamedQuery(name = "User.findByUserRole", query = "SELECT u FROM User u WHERE u.userRole = :userRole")})
 public class User implements Serializable {
 
@@ -71,8 +71,8 @@ public class User implements Serializable {
     @Column(name = "active")
     private Boolean active;
     @Size(max = 100)
-    @Column(name = "avater")
-    private String avater;
+    @Column(name = "avatar")
+    private String avatar;
     @Size(max = 10)
     @Column(name = "user_role")
     private String userRole;
@@ -152,12 +152,12 @@ public class User implements Serializable {
         this.active = active;
     }
 
-    public String getAvater() {
-        return avater;
+    public String getAvatar() {
+        return avatar;
     }
 
-    public void setAvater(String avater) {
-        this.avater = avater;
+    public void setAvatar(String avatar) {
+        this.avatar = avatar;
     }
 
     public String getUserRole() {

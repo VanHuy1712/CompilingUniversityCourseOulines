@@ -5,6 +5,7 @@
 package com.vh.pojo;
 
 import java.io.Serializable;
+import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -16,18 +17,21 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author Huy
+ * @author DELL
  */
 @Entity
 @Table(name = "outline_term")
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "OutlineTerm.findAll", query = "SELECT o FROM OutlineTerm o"),
-    @NamedQuery(name = "OutlineTerm.findById", query = "SELECT o FROM OutlineTerm o WHERE o.id = :id")})
+    @NamedQuery(name = "OutlineTerm.findById", query = "SELECT o FROM OutlineTerm o WHERE o.id = :id"),
+    @NamedQuery(name = "OutlineTerm.findByCreatedDate", query = "SELECT o FROM OutlineTerm o WHERE o.createdDate = :createdDate")})
 public class OutlineTerm implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -36,6 +40,9 @@ public class OutlineTerm implements Serializable {
     @Basic(optional = false)
     @Column(name = "id")
     private Integer id;
+    @Column(name = "created_date")
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date createdDate;
     @JoinColumn(name = "academic_id", referencedColumnName = "id")
     @ManyToOne
     private AcademicTerm academicId;
@@ -56,6 +63,14 @@ public class OutlineTerm implements Serializable {
 
     public void setId(Integer id) {
         this.id = id;
+    }
+
+    public Date getCreatedDate() {
+        return createdDate;
+    }
+
+    public void setCreatedDate(Date createdDate) {
+        this.createdDate = createdDate;
     }
 
     public AcademicTerm getAcademicId() {
