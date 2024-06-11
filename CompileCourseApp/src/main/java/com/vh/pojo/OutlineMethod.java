@@ -16,11 +16,12 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
+import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author Huy
+ * @author DELL
  */
 @Entity
 @Table(name = "outline_method")
@@ -28,7 +29,8 @@ import javax.xml.bind.annotation.XmlRootElement;
 @NamedQueries({
     @NamedQuery(name = "OutlineMethod.findAll", query = "SELECT o FROM OutlineMethod o"),
     @NamedQuery(name = "OutlineMethod.findById", query = "SELECT o FROM OutlineMethod o WHERE o.id = :id"),
-    @NamedQuery(name = "OutlineMethod.findByWeight", query = "SELECT o FROM OutlineMethod o WHERE o.weight = :weight")})
+    @NamedQuery(name = "OutlineMethod.findByWeight", query = "SELECT o FROM OutlineMethod o WHERE o.weight = :weight"),
+    @NamedQuery(name = "OutlineMethod.findByName", query = "SELECT o FROM OutlineMethod o WHERE o.name = :name")})
 public class OutlineMethod implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -40,6 +42,9 @@ public class OutlineMethod implements Serializable {
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Column(name = "weight")
     private Double weight;
+    @Size(max = 45)
+    @Column(name = "name")
+    private String name;
     @JoinColumn(name = "evaluation_method_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private EvaluationMethod evaluationMethodId;
@@ -68,6 +73,14 @@ public class OutlineMethod implements Serializable {
 
     public void setWeight(Double weight) {
         this.weight = weight;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public EvaluationMethod getEvaluationMethodId() {
