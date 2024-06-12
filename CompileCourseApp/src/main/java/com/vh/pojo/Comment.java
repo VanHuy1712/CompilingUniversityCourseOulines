@@ -13,6 +13,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinColumns;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -24,7 +25,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author DELL
+ * @author Huy
  */
 @Entity
 @Table(name = "comment")
@@ -50,10 +51,10 @@ public class Comment implements Serializable {
     private Date dayPost;
     @JoinColumn(name = "outline_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
-    private Outline outlineId;
+    private Outline outline;
     @JoinColumn(name = "user_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
-    private User userId;
+    private User user;
 
     public Comment() {
     }
@@ -86,20 +87,20 @@ public class Comment implements Serializable {
         this.dayPost = dayPost;
     }
 
-    public Outline getOutlineId() {
-        return outlineId;
+    public Outline getOutline() {
+        return outline;
     }
 
-    public void setOutlineId(Outline outlineId) {
-        this.outlineId = outlineId;
+    public void setOutline(Outline outline) {
+        this.outline = outline;
     }
 
-    public User getUserId() {
-        return userId;
+    public User getUser() {
+        return user;
     }
 
-    public void setUserId(User userId) {
-        this.userId = userId;
+    public void setUser(User user) {
+        this.user = user;
     }
 
     @Override

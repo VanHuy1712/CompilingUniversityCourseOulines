@@ -24,9 +24,9 @@ DROP TABLE IF EXISTS `academic_term`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `academic_term` (
   `id` int NOT NULL AUTO_INCREMENT,
-  `name` varchar(15) COLLATE utf8mb4_vietnamese_ci DEFAULT NULL,
+  `name` varchar(15) CHARACTER SET utf8mb4 COLLATE utf8mb4_vietnamese_ci DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_vietnamese_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_vietnamese_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -35,6 +35,7 @@ CREATE TABLE `academic_term` (
 
 LOCK TABLES `academic_term` WRITE;
 /*!40000 ALTER TABLE `academic_term` DISABLE KEYS */;
+INSERT INTO `academic_term` VALUES (1,'2021'),(2,'2022'),(3,'2023'),(4,'2024');
 /*!40000 ALTER TABLE `academic_term` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -47,7 +48,7 @@ DROP TABLE IF EXISTS `comment`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `comment` (
   `id` int NOT NULL AUTO_INCREMENT,
-  `content` varchar(45) COLLATE utf8mb4_vietnamese_ci DEFAULT NULL,
+  `content` varchar(45) CHARACTER SET utf8mb4 COLLATE utf8mb4_vietnamese_ci DEFAULT NULL,
   `day_post` datetime DEFAULT NULL,
   `user_id` int NOT NULL,
   `outline_id` int NOT NULL,
@@ -56,7 +57,7 @@ CREATE TABLE `comment` (
   KEY `fk_comment_outline1_idx` (`outline_id`),
   CONSTRAINT `fk_comment_outline1` FOREIGN KEY (`outline_id`) REFERENCES `outline` (`id`),
   CONSTRAINT `fk_comment_user1` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_vietnamese_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_vietnamese_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -65,6 +66,7 @@ CREATE TABLE `comment` (
 
 LOCK TABLES `comment` WRITE;
 /*!40000 ALTER TABLE `comment` DISABLE KEYS */;
+INSERT INTO `comment` VALUES (1,'Great course!','2024-01-15 10:30:00',1,1),(2,'Very helpful.','2024-02-20 11:45:00',2,2),(3,'Needs more examples.','2024-03-12 09:00:00',3,3);
 /*!40000 ALTER TABLE `comment` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -77,12 +79,12 @@ DROP TABLE IF EXISTS `course`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `course` (
   `id` int NOT NULL AUTO_INCREMENT,
-  `name` varchar(60) COLLATE utf8mb4_vietnamese_ci DEFAULT NULL,
+  `name` varchar(45) CHARACTER SET utf8mb4 COLLATE utf8mb4_vietnamese_ci DEFAULT NULL,
   `faculty_id` int DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `fk_course_faculty_idx` (`faculty_id`),
   CONSTRAINT `fk_course_faculty` FOREIGN KEY (`faculty_id`) REFERENCES `faculty` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_vietnamese_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_vietnamese_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -91,7 +93,7 @@ CREATE TABLE `course` (
 
 LOCK TABLES `course` WRITE;
 /*!40000 ALTER TABLE `course` DISABLE KEYS */;
-INSERT INTO `course` VALUES (1,'LẬP TRÌNH TRÊN LẬP TRÌNH TRÊN THIẾT BỊ DI ĐỘNG',1),(2,'MẠNG MÁY TÍNH',1),(3,'CƠ SỞ DỮ LIỆU',1);
+INSERT INTO `course` VALUES (1,'Kỹ Thuật Lập Trình',1),(2,'Hệ Điều Hành',1),(3,'Hướng Đối Tượng',1),(4,'Ứng Dụng Web',1);
 /*!40000 ALTER TABLE `course` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -104,9 +106,9 @@ DROP TABLE IF EXISTS `evaluation_method`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `evaluation_method` (
   `id` int NOT NULL AUTO_INCREMENT,
-  `name` varchar(15) COLLATE utf8mb4_vietnamese_ci DEFAULT NULL,
+  `name` varchar(45) CHARACTER SET utf8mb4 COLLATE utf8mb4_vietnamese_ci DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_vietnamese_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_vietnamese_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -115,6 +117,7 @@ CREATE TABLE `evaluation_method` (
 
 LOCK TABLES `evaluation_method` WRITE;
 /*!40000 ALTER TABLE `evaluation_method` DISABLE KEYS */;
+INSERT INTO `evaluation_method` VALUES (1,'Đánh giá quá trình'),(2,'Đánh giá giữa kỳ'),(3,'Đánh giá cuối kỳ');
 /*!40000 ALTER TABLE `evaluation_method` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -127,10 +130,10 @@ DROP TABLE IF EXISTS `faculty`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `faculty` (
   `id` int NOT NULL AUTO_INCREMENT,
-  `name` varchar(45) COLLATE utf8mb4_vietnamese_ci DEFAULT NULL,
-  `dean` varchar(45) COLLATE utf8mb4_vietnamese_ci DEFAULT NULL,
+  `name` varchar(45) CHARACTER SET utf8mb4 COLLATE utf8mb4_vietnamese_ci DEFAULT NULL,
+  `dean` varchar(45) CHARACTER SET utf8mb4 COLLATE utf8mb4_vietnamese_ci DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_vietnamese_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_vietnamese_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -139,7 +142,7 @@ CREATE TABLE `faculty` (
 
 LOCK TABLES `faculty` WRITE;
 /*!40000 ALTER TABLE `faculty` DISABLE KEYS */;
-INSERT INTO `faculty` VALUES (1,'Công nghệ thông tin','Trương HV');
+INSERT INTO `faculty` VALUES (1,'Công nghệ thông tin','Trương HV'),(2,'Tài chính','Nguyễn Văn A'),(3,'Xã Hội','Lê Thị B');
 /*!40000 ALTER TABLE `faculty` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -153,13 +156,13 @@ DROP TABLE IF EXISTS `outline`;
 CREATE TABLE `outline` (
   `id` int NOT NULL AUTO_INCREMENT,
   `create_date` datetime DEFAULT NULL,
-  `language` varchar(45) COLLATE utf8mb4_vietnamese_ci DEFAULT NULL,
-  `teching_method` varchar(45) COLLATE utf8mb4_vietnamese_ci DEFAULT NULL,
-  `knowledge` varchar(45) COLLATE utf8mb4_vietnamese_ci DEFAULT NULL,
+  `language` varchar(45) CHARACTER SET utf8mb4 COLLATE utf8mb4_vietnamese_ci DEFAULT NULL,
+  `teching_method` varchar(45) CHARACTER SET utf8mb4 COLLATE utf8mb4_vietnamese_ci DEFAULT NULL,
+  `knowledge` varchar(45) CHARACTER SET utf8mb4 COLLATE utf8mb4_vietnamese_ci DEFAULT NULL,
   `credit` float DEFAULT NULL,
-  `policy` text COLLATE utf8mb4_vietnamese_ci,
-  `objectives` text COLLATE utf8mb4_vietnamese_ci,
-  `description` text COLLATE utf8mb4_vietnamese_ci,
+  `policy` text CHARACTER SET utf8mb4 COLLATE utf8mb4_vietnamese_ci,
+  `objectives` text CHARACTER SET utf8mb4 COLLATE utf8mb4_vietnamese_ci,
+  `description` text CHARACTER SET utf8mb4 COLLATE utf8mb4_vietnamese_ci,
   `user_id` int NOT NULL,
   `course_id` int NOT NULL,
   PRIMARY KEY (`id`),
@@ -167,7 +170,7 @@ CREATE TABLE `outline` (
   KEY `fk_outline_course1_idx` (`course_id`),
   CONSTRAINT `fk_outline_course1` FOREIGN KEY (`course_id`) REFERENCES `course` (`id`),
   CONSTRAINT `fk_outline_user` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_vietnamese_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_vietnamese_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -176,6 +179,7 @@ CREATE TABLE `outline` (
 
 LOCK TABLES `outline` WRITE;
 /*!40000 ALTER TABLE `outline` DISABLE KEYS */;
+INSERT INTO `outline` VALUES (1,'2024-01-01 00:00:00','Vietnamese','Trực tiếp','Kiến thức ngành',3,'- Sinh viên tham gia đầy đủ các buổi học lý thuyết và thực hành.\n- Sinh viên tham gia đầy đủ các hoạt động học tập trên hệ thống LMS theo yêu cầu của GV.','- Nhận thức được tầm quan trọng của môn học.\n- Có khả năng tự học, tự trao dồi kiến thức.\n- Yêu thích các môn học lập trình và thích khám phá những bài toán khó.','Môn Kỹ Thuật Lập Trình trang bị cho sinh viên một số kiến thức tiếp theo của lập trình cấu trúc mà chưa được đề cập trong môn Cơ sở lập trình. Nội dung môn học bao gồm: mảng nhiều chiều, đệ qui, con trỏ, chuỗi ký tự, các kiểu dữ liệu tự tạo và các thao tác với tập tin. Ngôn ngữ lập trình được dùng để minh hoạ là C++.',1,1),(2,'2024-01-02 00:00:00','English','Kết hợp','Kiến thức ngành',4,'Policy 2','Objectives 2','Description 2',2,2),(3,'2024-01-03 00:00:00','French','Trực tuyến','Kiến thức ngành',2,'Policy 3','Objectives 3','Description 3',3,3);
 /*!40000 ALTER TABLE `outline` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -189,15 +193,15 @@ DROP TABLE IF EXISTS `outline_method`;
 CREATE TABLE `outline_method` (
   `id` int NOT NULL AUTO_INCREMENT,
   `weight` double DEFAULT NULL,
-  `name` varchar(45) COLLATE utf8mb4_vietnamese_ci DEFAULT NULL,
   `outline_id` int NOT NULL,
   `evaluation_method_id` int NOT NULL,
+  `name` varchar(45) CHARACTER SET utf8mb4 COLLATE utf8mb4_vietnamese_ci DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `fk_outline_method_outline1_idx` (`outline_id`),
   KEY `fk_outline_method_evaluation_method1_idx` (`evaluation_method_id`),
   CONSTRAINT `fk_outline_method_evaluation_method1` FOREIGN KEY (`evaluation_method_id`) REFERENCES `evaluation_method` (`id`),
   CONSTRAINT `fk_outline_method_outline1` FOREIGN KEY (`outline_id`) REFERENCES `outline` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_vietnamese_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_vietnamese_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -206,6 +210,7 @@ CREATE TABLE `outline_method` (
 
 LOCK TABLES `outline_method` WRITE;
 /*!40000 ALTER TABLE `outline_method` DISABLE KEYS */;
+INSERT INTO `outline_method` VALUES (1,20,1,1,'Điểm danh buổi học'),(2,30,1,2,'Kiểm tra trên máy'),(3,50,1,3,'Kiểm tra tự luận');
 /*!40000 ALTER TABLE `outline_method` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -226,7 +231,7 @@ CREATE TABLE `outline_term` (
   KEY `fk_term_detail_idx` (`academic_id`),
   CONSTRAINT `fk_outline_detail` FOREIGN KEY (`outline_id`) REFERENCES `outline` (`id`),
   CONSTRAINT `fk_term_detail` FOREIGN KEY (`academic_id`) REFERENCES `academic_term` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_vietnamese_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_vietnamese_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -235,6 +240,7 @@ CREATE TABLE `outline_term` (
 
 LOCK TABLES `outline_term` WRITE;
 /*!40000 ALTER TABLE `outline_term` DISABLE KEYS */;
+INSERT INTO `outline_term` VALUES (1,1,1,'2024-01-01 00:00:00'),(2,2,2,'2024-01-02 00:00:00'),(3,3,3,'2024-01-03 00:00:00');
 /*!40000 ALTER TABLE `outline_term` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -247,17 +253,17 @@ DROP TABLE IF EXISTS `user`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `user` (
   `id` int NOT NULL AUTO_INCREMENT,
-  `first_name` varchar(45) COLLATE utf8mb4_vietnamese_ci DEFAULT NULL,
-  `last_name` varchar(45) COLLATE utf8mb4_vietnamese_ci DEFAULT NULL,
-  `email` varchar(45) COLLATE utf8mb4_vietnamese_ci DEFAULT NULL,
-  `phone` varchar(45) COLLATE utf8mb4_vietnamese_ci DEFAULT NULL,
-  `username` varchar(45) COLLATE utf8mb4_vietnamese_ci DEFAULT NULL,
-  `password` varchar(100) COLLATE utf8mb4_vietnamese_ci DEFAULT NULL,
+  `first_name` varchar(45) CHARACTER SET utf8mb4 COLLATE utf8mb4_vietnamese_ci DEFAULT NULL,
+  `last_name` varchar(45) CHARACTER SET utf8mb4 COLLATE utf8mb4_vietnamese_ci DEFAULT NULL,
+  `email` varchar(45) CHARACTER SET utf8mb4 COLLATE utf8mb4_vietnamese_ci DEFAULT NULL,
+  `phone` varchar(45) CHARACTER SET utf8mb4 COLLATE utf8mb4_vietnamese_ci DEFAULT NULL,
+  `username` varchar(45) CHARACTER SET utf8mb4 COLLATE utf8mb4_vietnamese_ci DEFAULT NULL,
+  `password` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_vietnamese_ci DEFAULT NULL,
   `active` bit(1) DEFAULT NULL,
-  `avatar` varchar(100) COLLATE utf8mb4_vietnamese_ci DEFAULT NULL,
-  `user_role` varchar(10) COLLATE utf8mb4_vietnamese_ci DEFAULT NULL,
+  `avatar` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_vietnamese_ci DEFAULT NULL,
+  `user_role` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_vietnamese_ci DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_vietnamese_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_vietnamese_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -266,6 +272,7 @@ CREATE TABLE `user` (
 
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
+INSERT INTO `user` VALUES (1,'Nguyen','Van A','nva@example.com','0123456789','nva','password1',_binary '','avatar1.png','student'),(2,'Tran','Thi B','ttb@example.com','0987654321','ttb','password2',_binary '','avatar2.png','teacher'),(3,'Le','Minh C','lmc@example.com','0111222333','lmc','password3',_binary '','avatar3.png','admin');
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -278,4 +285,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-06-11 22:50:36
+-- Dump completed on 2024-06-12  9:36:52

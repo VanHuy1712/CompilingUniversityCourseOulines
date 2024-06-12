@@ -12,6 +12,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinColumns;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -21,7 +22,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author DELL
+ * @author Huy
  */
 @Entity
 @Table(name = "outline_method")
@@ -47,10 +48,10 @@ public class OutlineMethod implements Serializable {
     private String name;
     @JoinColumn(name = "evaluation_method_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
-    private EvaluationMethod evaluationMethodId;
+    private EvaluationMethod evaluationMethod;
     @JoinColumn(name = "outline_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
-    private Outline outlineId;
+    private Outline outline;
 
     public OutlineMethod() {
     }
@@ -83,20 +84,20 @@ public class OutlineMethod implements Serializable {
         this.name = name;
     }
 
-    public EvaluationMethod getEvaluationMethodId() {
-        return evaluationMethodId;
+    public EvaluationMethod getEvaluationMethod() {
+        return evaluationMethod;
     }
 
-    public void setEvaluationMethodId(EvaluationMethod evaluationMethodId) {
-        this.evaluationMethodId = evaluationMethodId;
+    public void setEvaluationMethod(EvaluationMethod evaluationMethod) {
+        this.evaluationMethod = evaluationMethod;
     }
 
-    public Outline getOutlineId() {
-        return outlineId;
+    public Outline getOutline() {
+        return outline;
     }
 
-    public void setOutlineId(Outline outlineId) {
-        this.outlineId = outlineId;
+    public void setOutline(Outline outline) {
+        this.outline = outline;
     }
 
     @Override

@@ -5,7 +5,7 @@
 package com.vh.pojo;
 
 import java.io.Serializable;
-import java.util.Collection;
+import java.util.Set;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -25,7 +25,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 /**
  *
- * @author DELL
+ * @author Huy
  */
 @Entity
 @Table(name = "user")
@@ -78,11 +78,11 @@ public class User implements Serializable {
     @Size(max = 10)
     @Column(name = "user_role")
     private String userRole;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "userId")
-    private Collection<Outline> outlineCollection;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "userId")
-    private Collection<Comment> commentCollection;
-    
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
+    private Set<Outline> outlineSet;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
+    private Set<Comment> commentSet;
+
     @Transient
     private MultipartFile file;
 
@@ -174,21 +174,21 @@ public class User implements Serializable {
     }
 
     @XmlTransient
-    public Collection<Outline> getOutlineCollection() {
-        return outlineCollection;
+    public Set<Outline> getOutlineSet() {
+        return outlineSet;
     }
 
-    public void setOutlineCollection(Collection<Outline> outlineCollection) {
-        this.outlineCollection = outlineCollection;
+    public void setOutlineSet(Set<Outline> outlineSet) {
+        this.outlineSet = outlineSet;
     }
 
     @XmlTransient
-    public Collection<Comment> getCommentCollection() {
-        return commentCollection;
+    public Set<Comment> getCommentSet() {
+        return commentSet;
     }
 
-    public void setCommentCollection(Collection<Comment> commentCollection) {
-        this.commentCollection = commentCollection;
+    public void setCommentSet(Set<Comment> commentSet) {
+        this.commentSet = commentSet;
     }
 
     @Override
@@ -220,12 +220,12 @@ public class User implements Serializable {
     public MultipartFile getFile() {
         return file;
     }
-
+    
     /**
      * @param file the file to set
      */
     public void setFile(MultipartFile file) {
         this.file = file;
-    }
+}
     
 }

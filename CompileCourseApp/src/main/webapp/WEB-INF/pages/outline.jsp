@@ -2,13 +2,13 @@
     Created on : Jun 10, 2024, 9:46:50 PM
     Author : DELL
 --%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <h1 class="text-center text-info mt-1">ĐỀ CƯƠNG MÔN HỌC</h1>
 <div class="section">
     <div class="section-title"><strong>I. Thông Tin Tổng Quát</strong></div> <br>
     <div class="content">
-        <p><strong>Tên Môn Học:</strong> <span>${outline.courseId.name}</span></p>
+        <p><strong>Tên Môn Học:</strong> <span>${outline.course.name}</span></p>
         <p><strong>Phương Thức Giảng Dạy:</strong> <span>${outline.techingMethod}</span></p>
         <p><strong>Ngôn Ngữ Giảng Dạy:</strong> <span>${outline.language}</span></p>
         <p><strong>Thuộc Khối Kiến Thức:</strong> <span>${outline.knowledge}</span></p>
@@ -32,9 +32,9 @@
             <tbody>
                 <c:set var="totalPercent" value="0" />
                 <c:forEach items="${outlineMethods}" var="m">
-                    <c:if test="${m.outlineId.id eq outline.id}">
+                    <c:if test="${m.outline.id eq outline.id}">
                         <tr>
-                            <td>${m.evaluationMethodId.name}</td>
+                            <td>${m.evaluationMethod.name}</td>
                             <td>${m.name}</td>
                             <td>${m.weight}%</td>
                             <c:set var="totalPercent" value="${totalPercent + m.weight}" />

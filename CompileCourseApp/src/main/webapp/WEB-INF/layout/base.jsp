@@ -1,12 +1,7 @@
 <%-- 
     Document   : base
-<<<<<<< HEAD
     Created on : Jun 11, 2024, 2:45:20 PM
     Author     : Huy
-=======
-    Created on : Jun 10, 2024, 8:36:52 PM
-    Author     : DELL
->>>>>>> f99b71e5e95a248a02d841e27b7aabf1b71ab969
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>

@@ -14,6 +14,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinColumns;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -25,7 +26,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author DELL
+ * @author Huy
  */
 @Entity
 @Table(name = "course")
@@ -42,14 +43,14 @@ public class Course implements Serializable {
     @Basic(optional = false)
     @Column(name = "id")
     private Integer id;
-    @Size(max = 60)
+    @Size(max = 45)
     @Column(name = "name")
     private String name;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "courseId")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "course")
     private Set<Outline> outlineSet;
     @JoinColumn(name = "faculty_id", referencedColumnName = "id")
     @ManyToOne
-    private Faculty facultyId;
+    private Faculty faculty;
 
     public Course() {
     }
@@ -74,12 +75,21 @@ public class Course implements Serializable {
         this.name = name;
     }
 
-    public Faculty getFacultyId() {
-        return facultyId;
+    @XmlTransient
+    public Set<Outline> getOutlineSet() {
+        return outlineSet;
     }
 
-    public void setFacultyId(Faculty facultyId) {
-        this.facultyId = facultyId;
+    public void setOutlineSet(Set<Outline> outlineSet) {
+        this.outlineSet = outlineSet;
+    }
+
+    public Faculty getFaculty() {
+        return faculty;
+    }
+
+    public void setFaculty(Faculty faculty) {
+        this.faculty = faculty;
     }
 
     @Override

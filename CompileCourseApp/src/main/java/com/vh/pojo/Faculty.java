@@ -22,7 +22,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author DELL
+ * @author Huy
  */
 @Entity
 @Table(name = "faculty")
@@ -46,7 +46,7 @@ public class Faculty implements Serializable {
     @Size(max = 45)
     @Column(name = "dean")
     private String dean;
-    @OneToMany(mappedBy = "facultyId")
+    @OneToMany(mappedBy = "faculty")
     private Set<Course> courseSet;
 
     public Faculty() {

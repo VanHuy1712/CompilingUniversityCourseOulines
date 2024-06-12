@@ -12,9 +12,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -22,7 +22,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author DELL
+ * @author Huy
  */
 @Entity
 @Table(name = "academic_term")
@@ -42,8 +42,8 @@ public class AcademicTerm implements Serializable {
     @Size(max = 15)
     @Column(name = "name")
     private String name;
-    @OneToMany(mappedBy = "academicId")
-    private Set<OutlineTerm> outlineTermSet;
+    @ManyToMany(mappedBy = "academicTermSet")
+    private Set<Outline> outlineSet;
 
     public AcademicTerm() {
     }
@@ -67,13 +67,14 @@ public class AcademicTerm implements Serializable {
     public void setName(String name) {
         this.name = name;
     }
-    
-    public Set<OutlineTerm> getOutlineTermSet() {
-        return outlineTermSet;
+
+    @XmlTransient
+    public Set<Outline> getOutlineSet() {
+        return outlineSet;
     }
 
-    public void setOutlineTermSet(Set<OutlineTerm> outlineTermSet) {
-        this.outlineTermSet = outlineTermSet;
+    public void setOutlineSet(Set<Outline> outlineSet) {
+        this.outlineSet = outlineSet;
     }
 
     @Override

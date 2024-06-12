@@ -28,14 +28,14 @@ public class IndexController {
 
     @Autowired
     private CourseService courseService;
-    @Autowired
+    
 //    private UserService userService;
     
 //    @ModelAttribute
 //    public void commonAttr(Model model) {
 //        model.addAttribute("users", this.userService.);
 //    }
-
+    @Autowired
     private OutlineService outlineService;
     @Autowired
     private OutlineTermService outlineTermService;

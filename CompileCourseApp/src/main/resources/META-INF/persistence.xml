@@ -2,15 +2,15 @@
 <persistence version="2.1" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
   <persistence-unit name="com.vh_CompileCourseApp_war_1.0-SNAPSHOTPU" transaction-type="RESOURCE_LOCAL">
     <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
-    <class>com.vh.pojo.AcademicTerm</class>
-    <class>com.vh.pojo.OutlineMethod</class>
-    <class>com.vh.pojo.Comment</class>
-    <class>com.vh.pojo.Outline</class>
     <class>com.vh.pojo.User</class>
-    <class>com.vh.pojo.EvaluationMethod</class>
     <class>com.vh.pojo.Course</class>
-    <class>com.vh.pojo.OutlineTerm</class>
+    <class>com.vh.pojo.Outline</class>
+    <class>com.vh.pojo.Comment</class>
+    <class>com.vh.pojo.AcademicTerm</class>
     <class>com.vh.pojo.Faculty</class>
+    <class>com.vh.pojo.OutlineMethod</class>
+    <class>com.vh.pojo.EvaluationMethod</class>
+    <class>com.vh.pojo.OutlineTerm</class>
     <exclude-unlisted-classes>false</exclude-unlisted-classes>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/compilecoursedb?zeroDateTimeBehavior=CONVERT_TO_NULL"/>

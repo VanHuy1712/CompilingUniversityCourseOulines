@@ -24,8 +24,8 @@
         <c:forEach items="${outlines}" var="o">
             <tr>
                 <td>${o.id}</td>
-                
-                <td><a class="btn btn-infor" href="<c:url value="/outline/${o.id}"/>">${o.courseId.name}</a></td>
+
+                <td><a class="btn btn-infor" href="<c:url value="/outline/${o.id}"/>">${o.course.name}</a></td>
 
                 <c:forEach items="${outlineTerms}" var="t">
                     <c:if test="${t.outlineId.id eq o.id}">
@@ -33,7 +33,7 @@
                     </c:if>
                 </c:forEach>
 
-                <td>${o.userId.firstName} ${o.userId.lastName}</td>
+                <td>${o.user.firstName} ${o.user.lastName}</td>
                 <td>${o.createDate}</td>
                 <td>
                     <button class="btn btn-info">Cập nhật</button>

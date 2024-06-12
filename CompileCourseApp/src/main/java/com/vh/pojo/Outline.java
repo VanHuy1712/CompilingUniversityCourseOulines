@@ -15,7 +15,10 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinColumns;
+import javax.persistence.JoinTable;
 import javax.persistence.Lob;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -29,7 +32,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author DELL
+ * @author Huy
  */
 @Entity
 @Table(name = "outline")
@@ -37,7 +40,6 @@ import javax.xml.bind.annotation.XmlTransient;
 @NamedQueries({
     @NamedQuery(name = "Outline.findAll", query = "SELECT o FROM Outline o"),
     @NamedQuery(name = "Outline.findById", query = "SELECT o FROM Outline o WHERE o.id = :id"),
-    @NamedQuery(name = "Outline.findByTitle", query = "SELECT o FROM Outline o WHERE o.title = :title"),
     @NamedQuery(name = "Outline.findByCreateDate", query = "SELECT o FROM Outline o WHERE o.createDate = :createDate"),
     @NamedQuery(name = "Outline.findByLanguage", query = "SELECT o FROM Outline o WHERE o.language = :language"),
     @NamedQuery(name = "Outline.findByTechingMethod", query = "SELECT o FROM Outline o WHERE o.techingMethod = :techingMethod"),
@@ -51,9 +53,6 @@ public class Outline implements Serializable {
     @Basic(optional = false)
     @Column(name = "id")
     private Integer id;
-    @Size(max = 45)
-    @Column(name = "title")
-    private String title;
     @Column(name = "create_date")
     @Temporal(TemporalType.TIMESTAMP)
     private Date createDate;
@@ -81,13 +80,17 @@ public class Outline implements Serializable {
     @Size(max = 65535)
     @Column(name = "description")
     private String description;
+    @ManyToMany
+    private Set<AcademicTerm> academicTermSet;
     @JoinColumn(name = "course_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
-    private Course courseId;
+    private Course course;
     @JoinColumn(name = "user_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
-    private User userId;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "outlineId")
+    private User user;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "outline")
+    private Set<OutlineMethod> outlineMethodSet;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "outline")
     private Set<Comment> commentSet;
     @OneToMany(mappedBy = "outlineId")
     private Set<OutlineTerm> outlineTermSet;
@@ -171,29 +174,47 @@ public class Outline implements Serializable {
         this.description = description;
     }
 
-    public Course getCourseId() {
-        return courseId;
+    @XmlTransient
+    public Set<AcademicTerm> getAcademicTermSet() {
+        return academicTermSet;
     }
 
-    public void setCourseId(Course courseId) {
-        this.courseId = courseId;
+    public void setAcademicTermSet(Set<AcademicTerm> academicTermSet) {
+        this.academicTermSet = academicTermSet;
     }
 
-    public User getUserId() {
-        return userId;
+    public Course getCourse() {
+        return course;
     }
 
-    public void setUserId(User userId) {
-        this.userId = userId;
+    public void setCourse(Course course) {
+        this.course = course;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 
     @XmlTransient
-    public Set<OutlineTerm> getOutlineTermSet() {
-        return outlineTermSet;
+    public Set<OutlineMethod> getOutlineMethodSet() {
+        return outlineMethodSet;
     }
 
-    public void setOutlineTermSet(Set<OutlineTerm> outlineTermSet) {
-        this.outlineTermSet = outlineTermSet;
+    public void setOutlineMethodSet(Set<OutlineMethod> outlineMethodSet) {
+        this.outlineMethodSet = outlineMethodSet;
+    }
+
+    @XmlTransient
+    public Set<Comment> getCommentSet() {
+        return commentSet;
+    }
+
+    public void setCommentSet(Set<Comment> commentSet) {
+        this.commentSet = commentSet;
     }
 
     @Override
