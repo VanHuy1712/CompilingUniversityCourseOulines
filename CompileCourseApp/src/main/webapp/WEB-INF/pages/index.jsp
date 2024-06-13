@@ -9,6 +9,7 @@
 
 <div>
     <a class="btn btn-success" href="#">Biên soạn đề cương mới</a>
+    <a class="btn btn-success" href="<c:url value="/sreachoutlines"/>">Tìm kiếm đề cương chi tiết</a>
 </div>
 <table class="table table-striped mt-1">
     <thead>

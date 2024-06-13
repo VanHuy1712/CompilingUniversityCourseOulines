@@ -23,7 +23,26 @@
                         <a class="nav-link" href="#">${a.name}</a>
                     </li>
                 </c:forEach>
+                <li class="nav-item">
+                    <a class="nav-link text-success" href="<c:url value="/stats" />">Thống kê</a>
+                </li>
+                <c:choose>
+                    <c:when test="${pageContext.request.userPrincipal.name == null}">
+                        <li class="nav-item">
+                            <a class="nav-link text-info" href="<c:url value="/login" />">Đăng nhập</a>
+                        </li>
+                    </c:when>
+                    <c:when test="${pageContext.request.userPrincipal.name != null}">
+                        <li class="nav-item">
+                            <a class="nav-link text-info" href="<c:url value="/" />">Chào ${pageContext.request.userPrincipal.name}!</a>
+                        </li>
+                    </c:when>
+                </c:choose>
             </ul>
+            <form action="<c:url value="/" />" class="d-flex ms-auto">
+                <input class="form-control me-2" name="kw" type="text" placeholder="Nhập tên...">
+                <button class="btn btn-primary" type="submit">Tìm</button>
+            </form>
         </div>
     </div>
 </nav>

@@ -56,4 +56,14 @@ public class OutlineServiceImpl implements OutlineService{
     public void deleteOutline(int id) {
         this.outlineRepo.deleteOutline(id);
     }
+
+//    @Override
+//    public List<Outline> sreachOutlines(String nameCourse, Integer credit, String teacherName, String term) {
+//       return this.outlineRepo.sreachOutlines(nameCourse, credit, teacherName, term);
+//    }
+
+    @Override
+    public List<Outline> sreachOutlines(Map<String, String> params) {
+        return this.outlineRepo.sreachOutlines(params);
+    }
 }

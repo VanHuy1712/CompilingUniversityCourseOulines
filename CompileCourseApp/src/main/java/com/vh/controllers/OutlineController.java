@@ -4,13 +4,17 @@
  */
 package com.vh.controllers;
 
+import com.vh.pojo.Outline;
 import com.vh.services.OutlineMethodService;
 import com.vh.services.OutlineService;
+import java.util.List;
+import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestParam;
 
 /**
  *
@@ -18,9 +22,10 @@ import org.springframework.web.bind.annotation.PathVariable;
  */
 @Controller
 public class OutlineController {
+
     @Autowired
     private OutlineService outService;
-    
+
     @Autowired
     private OutlineMethodService outlineMethodService;
 
@@ -31,4 +36,24 @@ public class OutlineController {
 
         return "outline";
     }
+
+    @GetMapping("/sreachoutlines")
+    public String sreachOutlineDetail(Model model, @RequestParam Map<String, String> params){
+        
+        model.addAttribute("outlines", this.outService.sreachOutlines(params));
+        
+        return "sreachoutlines";
+    }
+//    public String sreachOutlineDetail(Model model,
+//            @RequestParam(required = false) String nameCourse,
+//            @RequestParam(required = false) Integer credit,
+//            @RequestParam(required = false) String teacherName,
+//            @RequestParam(required = false) String term) {
+//
+//        List<Outline> outlines = this.outService.sreachOutlines(nameCourse, credit, teacherName, term);
+//        model.addAttribute("soutlines", outlines);
+////        model.addAttribute("soutlines", this.outService.sreachOutlines(nameCourse, Integer.SIZE, teacherName, term));
+//
+//        return "sreachoutlines";
+//    }
 }

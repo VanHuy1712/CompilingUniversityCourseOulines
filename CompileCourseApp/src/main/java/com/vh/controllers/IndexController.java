@@ -44,7 +44,7 @@ public class IndexController {
     
 //    @ModelAttribute
 //    public void commonAttr(Model model){
-//        model.addAttribute("academicterms", this.academicTermService.getAcademicTerms());
+//        model.addAttribute("courses", this.courseService.getCourses());
 //    }
     
     @RequestMapping("/")
@@ -52,7 +52,7 @@ public class IndexController {
         model.addAttribute("courses", this.courseService.getCourses());
         model.addAttribute("outlines", this.outlineService.getOutlines(params));
         model.addAttribute("outlineTerms", this.outlineTermService.getOutlineTerm());
-        model.addAttribute("academicterms", this.academicTermService.getAcademicTerms());
+        model.addAttribute("academicTerms", this.academicTermService.getAcademicTerms());
 
         return "index";
     }

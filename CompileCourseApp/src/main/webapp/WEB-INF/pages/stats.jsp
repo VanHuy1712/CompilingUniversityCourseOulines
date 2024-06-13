@@ -6,21 +6,21 @@
 
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<h1 class="text-center text-info mt-1">THỐNG KÊ DOANH THU</h1>
+<h1 class="text-center text-info mt-1">THỐNG KÊ ĐỀ CƯƠNG</h1>
 
 <div class="row">
     <div class="col-md-5 col-12">
         <table class="table">
             <tr>
                 <th>Id</th>
-                <th>Tên sản phẩm</th>
-                <th>Doanh thu</th>
+                <th>Tên đề cương</th>
+                <th>Khóa</th>
             </tr>
             <c:forEach items="${statsRevenue}" var="s">
                 <tr>
                     <td>${s[0]}</td>
                     <td>${s[1]}</td>
-                    <td>${String.format("%,d", s[2])} VNĐ</td>
+                    <td>${s[2]}</td>
                 </tr>
             </c:forEach>
         </table>
@@ -65,7 +65,7 @@
                 <tr>
 
                     <td>${s[0]}</td>
-                    <td>${String.format("%,d", s[1])} VNĐ</td>
+                    <td>${s[1]}</td>
                 </tr>
             </c:forEach>
         </table>
@@ -76,7 +76,7 @@
 
 </div>
 
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<!--<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script>
     let labels = [];
     let data = [];
@@ -120,4 +120,4 @@
         drawChart(ctx1, labels, data);
         drawChart(ctx2, label2, data2);
     }
-</script>
+</script>-->

@@ -14,6 +14,9 @@ import java.util.Map;
  */
 public interface OutlineRepository {
     List<Outline> getOutlines(Map<String, String> params);
+//    List<Outline> sreachOutlines(String nameCourse, Integer credit, String teacherName, String term);
+    List<Outline> sreachOutlines(Map<String, String> params);
+
 //    void addOrUpdate(Outline p);
     Outline getOutlineById(int id);
     void deleteOutline(int id);

@@ -44,10 +44,10 @@ public class OutlineTerm implements Serializable {
     @Temporal(TemporalType.TIMESTAMP)
     private Date createdDate;
     @JoinColumn(name = "academic_id", referencedColumnName = "id")
-    @ManyToOne
+    @ManyToOne(optional = false)
     private AcademicTerm academicId;
     @JoinColumn(name = "outline_id", referencedColumnName = "id")
-    @ManyToOne
+    @ManyToOne(optional = false)
     private Outline outlineId;
 
     public OutlineTerm() {

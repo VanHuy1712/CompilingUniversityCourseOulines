@@ -4,6 +4,7 @@
  */
 package com.vh.pojo;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.Set;
@@ -80,8 +81,6 @@ public class Outline implements Serializable {
     @Size(max = 65535)
     @Column(name = "description")
     private String description;
-    @ManyToMany
-    private Set<AcademicTerm> academicTermSet;
     @JoinColumn(name = "course_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private Course course;
@@ -92,8 +91,11 @@ public class Outline implements Serializable {
     private Set<OutlineMethod> outlineMethodSet;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "outline")
     private Set<Comment> commentSet;
-    @OneToMany(mappedBy = "outlineId")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "outlineId")
     private Set<OutlineTerm> outlineTermSet;
+//    @OneToMany(cascade = CascadeType.ALL, mappedBy = "productId")
+//    @JsonIgnore
+//    private Set<ProdTag> prodTagSet;
 
     public Outline() {
     }
@@ -173,15 +175,24 @@ public class Outline implements Serializable {
     public void setDescription(String description) {
         this.description = description;
     }
-
+    
     @XmlTransient
-    public Set<AcademicTerm> getAcademicTermSet() {
-        return academicTermSet;
+    public Set<OutlineTerm> getOutlineTermSet() {
+        return outlineTermSet;
     }
 
-    public void setAcademicTermSet(Set<AcademicTerm> academicTermSet) {
-        this.academicTermSet = academicTermSet;
+    public void setOrderDetailSet(Set<OutlineTerm> outlineTermSet) {
+        this.outlineTermSet = outlineTermSet;
     }
+
+//    @XmlTransient
+//    public Set<AcademicTerm> getAcademicTermSet() {
+//        return academicTermSet;
+//    }
+//
+//    public void setAcademicTermSet(Set<AcademicTerm> academicTermSet) {
+//        this.academicTermSet = academicTermSet;
+//    }
 
     public Course getCourse() {
         return course;

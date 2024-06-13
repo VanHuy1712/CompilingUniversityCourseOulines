@@ -33,22 +33,22 @@ public class StatsRepositoryImpl implements StatsRepository{
     private LocalSessionFactoryBean factory;
 
     @Override
-    public List<Object[]> statsRevenueByOutline() {
+    public List<Object[]> statsRevenueByAcademicTerm() {
         Session s = this.factory.getObject().getCurrentSession();
         CriteriaBuilder b = s.getCriteriaBuilder();
         CriteriaQuery<Object[]> q = b.createQuery(Object[].class);
 
-        Root rO = q.from(Outline.class);
+        Root rAT = q.from(AcademicTerm.class);
         Root rOT = q.from(OutlineTerm.class);
 
-        q.multiselect(rO.get("id"), rO.get("name"), rOT.get("id"));
+        q.multiselect(rAT.get("id"), rAT.get("name"), rOT.get("id"));
 
         List<Predicate> predicates = new ArrayList<>();
-        predicates.add(b.equal(rOT.get("outlindeId"), rO.get("id")));
+        predicates.add(b.equal(rOT.get("academicId"), rAT.get("id")));
 
         q.where(predicates.toArray(Predicate[]::new));
 
-        q.groupBy(rO.get("id"));
+        q.groupBy(rAT.get("id"));
 
         Query query = s.createQuery(q);
         return query.getResultList();
@@ -62,16 +62,16 @@ public class StatsRepositoryImpl implements StatsRepository{
         CriteriaQuery<Object[]> q = b.createQuery(Object[].class);
 
         Root rOT = q.from(OutlineTerm.class);
-        Root rAT = q.from(AcademicTerm.class);
+        Root rO = q.from(Outline.class);
 
-        q.multiselect(b.function(period, Integer.class, rOT.get("createdDate")), rAT.get("id"));
+        q.multiselect(b.function(period, Integer.class, rO.get("createdDate")), rOT.get("academicId"));
 
         List<Predicate> predicates = new ArrayList<>();
-        predicates.add(b.equal(rOT.get("academicId"), rAT.get("id")));
-        predicates.add(b.equal(b.function("YEAR", Integer.class, rOT.get("createdDate")), year));
+        predicates.add(b.equal(rOT.get("oulineId"), rO.get("id")));
+        predicates.add(b.equal(b.function("YEAR", Integer.class, rO.get("createdDate")), year));
 
         q.where(predicates.toArray(Predicate[]::new));
-        q.groupBy(b.function(period, Integer.class, rOT.get("createdDate")));
+        q.groupBy(b.function(period, Integer.class, rO.get("createdDate")));
 
         Query query = s.createQuery(q);
         return query.getResultList();

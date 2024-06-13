@@ -4,9 +4,11 @@
  */
 package com.vh.pojo;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.io.Serializable;
 import java.util.Set;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -15,6 +17,7 @@ import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -42,8 +45,12 @@ public class AcademicTerm implements Serializable {
     @Size(max = 15)
     @Column(name = "name")
     private String name;
-    @ManyToMany(mappedBy = "academicTermSet")
-    private Set<Outline> outlineSet;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "academicId")
+    @JsonIgnore
+    private Set<OutlineTerm> outlineTermSet;
+//    @OneToMany(cascade = CascadeType.ALL, mappedBy = "productId")
+//    @JsonIgnore
+//    private Set<ProdTag> prodTagSet;
 
     public AcademicTerm() {
     }
@@ -67,15 +74,24 @@ public class AcademicTerm implements Serializable {
     public void setName(String name) {
         this.name = name;
     }
-
+    
     @XmlTransient
-    public Set<Outline> getOutlineSet() {
-        return outlineSet;
+    public Set<OutlineTerm> getOutlineTermSet() {
+        return outlineTermSet;
     }
 
-    public void setOutlineSet(Set<Outline> outlineSet) {
-        this.outlineSet = outlineSet;
+    public void setOrderDetailSet(Set<OutlineTerm> outlineTermSet) {
+        this.outlineTermSet = outlineTermSet;
     }
+
+//    @XmlTransient
+//    public Set<Outline> getOutlineSet() {
+//        return outlineSet;
+//    }
+//
+//    public void setOutlineSet(Set<Outline> outlineSet) {
+//        this.outlineSet = outlineSet;
+//    }
 
     @Override
     public int hashCode() {
@@ -101,5 +117,5 @@ public class AcademicTerm implements Serializable {
     public String toString() {
         return "com.vh.pojo.AcademicTerm[ id=" + id + " ]";
     }
-    
+
 }
