@@ -14,6 +14,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 /**
@@ -37,10 +38,10 @@ public class OutlineController {
         return "outline";
     }
 
-    @GetMapping("/sreachoutlines")
+    @RequestMapping("/sreachoutlines")
     public String sreachOutlineDetail(Model model, @RequestParam Map<String, String> params){
         
-        model.addAttribute("outlines", this.outService.sreachOutlines(params));
+        model.addAttribute("soutlines", this.outService.sreachOutlines(params));
         
         return "sreachoutlines";
     }

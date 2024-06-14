@@ -4,6 +4,7 @@
  */
 package com.vh.repositories.impl;
 
+import com.vh.pojo.AcademicTerm;
 import com.vh.pojo.Course;
 import com.vh.pojo.Outline;
 import com.vh.pojo.OutlineTerm;
@@ -53,6 +54,7 @@ public class OutlineRepositoryImpl implements OutlineRepository {
 
         Join<Outline, Course> courseJoin = r.join("course");
         Join<Outline, User> userJoin = r.join("user");
+        Join<Outline, OutlineTerm> termJoind = r.join("outlineTermSet");
 
         String kw = params.get("kw");
         if (kw != null && !kw.isEmpty()) {
@@ -63,6 +65,17 @@ public class OutlineRepositoryImpl implements OutlineRepository {
         String courseCredit = params.get("courseCredit");
         if (courseCredit != null && !courseCredit.isEmpty()) {
             predicates.add(b.equal(r.get("credit"), Double.parseDouble(courseCredit)));
+        }
+        
+        String teacherName = params.get("teacherName");
+        if (teacherName != null && !teacherName.isEmpty()) {
+            predicates.add(b.like(r.get("user").get("lastName").as(String.class), "%" + teacherName + "%"));
+        }
+        
+        String term = params.get("term");
+        if (term != null && !term.isEmpty()) {
+            predicates.add(b.like(termJoind.get("academicId").get("name").as(String.class),
+                      "%" + term + "%"));
         }
 
         String outlineLanguage = params.get("outlineLanguage");
@@ -168,7 +181,7 @@ public class OutlineRepositoryImpl implements OutlineRepository {
 //        }
 
         String teacherName = params.get("teacherName");
-        if (credit != null) {
+        if (teacherName != null && !teacherName.isEmpty()) {
             predicates.add(b.like(r.get("user").get("lastName").as(String.class), "%" + teacherName + "%"));
         }
 //        

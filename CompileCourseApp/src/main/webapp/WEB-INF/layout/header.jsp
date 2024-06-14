@@ -41,6 +41,9 @@
             </ul>
             <form action="<c:url value="/" />" class="d-flex ms-auto">
                 <input class="form-control me-2" name="kw" type="text" placeholder="Nhập tên...">
+                <input class="form-control me-2" name="courseCredit" type="text" placeholder="Nhập tín chỉ...">
+                <input class="form-control me-2" name="teacherName" type="text" placeholder="Nhập tên giảng viên...">
+                <input class="form-control me-2" name="term" type="text" placeholder="Nhập khóa...">
                 <button class="btn btn-primary" type="submit">Tìm</button>
             </form>
         </div>

@@ -16,10 +16,6 @@
         <put-attribute name="title" value="Đề cương" />
         <put-attribute name="content" value="/WEB-INF/pages/outline.jsp" />
     </definition>
-    <definition name="sreachoutlines" extends="baseLayout">
-        <put-attribute name="title" value="Tìm đề cương" />
-        <put-attribute name="content" value="/WEB-INF/pages/sreachoutlines.jsp" />
-    </definition>
     <definition name="stats" extends="baseLayout">
         <put-attribute name="title" value="Thống kê báo cáo" />
         <put-attribute name="content" value="/WEB-INF/pages/stats.jsp" />
