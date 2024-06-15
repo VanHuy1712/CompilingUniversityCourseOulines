@@ -50,3 +50,7 @@
         <p><strong>Quy Định Môn Học:</strong> <br> <span>${outline.policy}</span> </p>
     </div>
 </div>
+<div>
+    
+    <a class="btn btn-primary" href="<c:url value="/outlines"/>">Chỉnh sửa đề cương</a>
+</div>

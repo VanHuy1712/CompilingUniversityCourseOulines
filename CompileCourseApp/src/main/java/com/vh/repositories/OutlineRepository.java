@@ -17,7 +17,7 @@ public interface OutlineRepository {
 //    List<Outline> sreachOutlines(String nameCourse, Integer credit, String teacherName, String term);
     List<Outline> sreachOutlines(Map<String, String> params);
 
-//    void addOrUpdate(Outline p);
+    void addOrUpdate(Outline o);
     Outline getOutlineById(int id);
     void deleteOutline(int id);
 }

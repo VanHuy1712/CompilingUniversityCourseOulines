@@ -8,8 +8,7 @@
 <h1 class="text-center text-info mt-1">QUẢN TRỊ ĐỀ CƯƠNG</h1>
 
 <div>
-    <a class="btn btn-success" href="#">Biên soạn đề cương mới</a>
-    <a class="btn btn-success" href="<c:url value="/sreachoutlines"/>">Tìm kiếm đề cương chi tiết</a>
+    <a class="btn btn-success" href="<c:url value="/outlines"/>">Biên soạn đề cương mới</a>
 </div>
 <table class="table table-striped mt-1">
     <thead>
@@ -37,11 +36,29 @@
                 <td>${o.user.firstName} ${o.user.lastName}</td>
                 <td>${o.createDate}</td>
                 <td>
+                    
                     <button class="btn btn-info">Cập nhật</button>
-
-                    <button class="btn btn-danger" >Xóa</button>
+                    
+                    <c:url value="/api/outlines/${o.id}/" var="urlDelete" />
+                    <button class="btn btn-danger" onclick="deleteOutline('${urlDelete}', ${o.id})">Xóa</button>
                 </td>
             </tr>
         </c:forEach>
     </tbody>
 </table>
+
+<script>
+function deleteOutline(url, outlineId) {
+    if (confirm("Bạn chắc chắn xóa không?") === true) {
+        fetch(url, {
+            method: "delete"
+        }).then(res => {
+            if (res.status === 204)
+                location.reload();
+            else
+                alert("Something wrong!");
+            
+        });
+    }
+}
+</script>

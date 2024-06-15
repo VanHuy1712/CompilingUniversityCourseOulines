@@ -25,27 +25,27 @@ import org.springframework.stereotype.Service;
 public class OutlineServiceImpl implements OutlineService{
     @Autowired
     private OutlineRepository outlineRepo;
-//    @Autowired
-//    private Cloudinary cloudinary;
+    @Autowired
+    private Cloudinary cloudinary;
 
     @Override
     public List<Outline> getOutlines(Map<String, String> params) {
         return this.outlineRepo.getOutlines(params);
     }
 
-//    @Override
-//    public void addOrUpdate(Outline p) {
-//        if (!p.getFile().isEmpty()) {
-//            try {
-//                Map res = this.cloudinary.uploader().upload(p.getFile().getBytes(), ObjectUtils.asMap("resource_type", "auto"));
-//                p.setImage(res.get("secure_url").toString());
-//            } catch (IOException ex) {
-//                Logger.getLogger(OutlineServiceImpl.class.getName()).log(Level.SEVERE, null, ex);
-//            }
-//        }
-//        
-//        this.outlineRepo.addOrUpdate(p);
-//    }
+    @Override
+    public void addOrUpdate(Outline o) {
+        if (!o.getFile().isEmpty()) {
+            try {
+                Map res = this.cloudinary.uploader().upload(o.getFile().getBytes(), ObjectUtils.asMap("resource_type", "auto"));
+//                o.setImage(res.get("secure_url").toString());
+            } catch (IOException ex) {
+                Logger.getLogger(OutlineServiceImpl.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        
+        this.outlineRepo.addOrUpdate(o);
+    }
 
     @Override
     public Outline getOutlineById(int id) {

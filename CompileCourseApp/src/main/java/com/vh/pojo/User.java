@@ -226,6 +226,6 @@ public class User implements Serializable {
      */
     public void setFile(MultipartFile file) {
         this.file = file;
-}
+    }
     
 }

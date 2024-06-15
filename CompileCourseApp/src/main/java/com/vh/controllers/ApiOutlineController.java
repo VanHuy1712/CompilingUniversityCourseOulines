@@ -10,11 +10,15 @@ import java.util.List;
 import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
@@ -33,7 +37,18 @@ public class ApiOutlineController {
         return new ResponseEntity<>(this.outlineService.getOutlines(params), HttpStatus.OK);
     }
     
-    @GetMapping("/sreachoutlines/")
+    @GetMapping(path = "/outlines/{outlineId}/", produces = {MediaType.APPLICATION_JSON_VALUE})
+    public ResponseEntity<Outline> retrieve(@PathVariable(value = "outlineId") int id) {
+        return new ResponseEntity<>(this.outlineService.getOutlineById(id), HttpStatus.OK);
+    }
+    
+    @DeleteMapping("/outlines/{outlineId}/")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void destroy(@PathVariable(value = "outlineId") int id) {
+        this.outlineService.deleteOutline(id);
+    }
+    
+//    @GetMapping("/sreachoutlines/")
 //    public ResponseEntity<List<Outline>> sreachOutlines(
 //            @RequestParam(required = false) String nameCourse,
 //            @RequestParam(required = false) Integer credit,
@@ -45,7 +60,7 @@ public class ApiOutlineController {
 //        }
 //        return new ResponseEntity<>(HttpStatus.OK);
 //    }
-    public ResponseEntity<List<Outline>> listSreach(@RequestParam  Map params) {
-        return new ResponseEntity<>(this.outlineService.sreachOutlines(params), HttpStatus.OK);
-    }
+//    public ResponseEntity<List<Outline>> listSreach(@RequestParam  Map params) {
+//        return new ResponseEntity<>(this.outlineService.sreachOutlines(params), HttpStatus.OK);
+//    }
 }

@@ -12,9 +12,13 @@
         <put-attribute name="title" value="Trang chủ" />
         <put-attribute name="content" value="/WEB-INF/pages/index.jsp" />
     </definition>
-    <definition name="outline" extends="baseLayout">
+    <definition name="outline-detail" extends="baseLayout">
         <put-attribute name="title" value="Đề cương" />
         <put-attribute name="content" value="/WEB-INF/pages/outline.jsp" />
+    </definition>
+    <definition name="outline-list" extends="baseLayout">
+        <put-attribute name="title" value="Đề cương" />
+        <put-attribute name="content" value="/WEB-INF/pages/outlineapi.jsp" />
     </definition>
     <definition name="stats" extends="baseLayout">
         <put-attribute name="title" value="Thống kê báo cáo" />
