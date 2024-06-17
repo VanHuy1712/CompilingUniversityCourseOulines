@@ -85,15 +85,20 @@ public class Outline implements Serializable {
     private String description;
     @JoinColumn(name = "course_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
+    @JsonIgnore
     private Course course;
     @JoinColumn(name = "user_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
+    @JsonIgnore
     private User user;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "outline")
+    @JsonIgnore
     private Set<OutlineMethod> outlineMethodSet;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "outline")
+    @JsonIgnore
     private Set<Comment> commentSet;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "outlineId")
+    @JsonIgnore
     private Set<OutlineTerm> outlineTermSet;
 //    @OneToMany(cascade = CascadeType.ALL, mappedBy = "productId")
 //    @JsonIgnore
