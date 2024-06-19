@@ -51,8 +51,8 @@ public class OutlineController {
     
     @GetMapping("/outlines")
     public String addOutlineView(Model model, @RequestParam Map<String, String> params) {
-        model.addAttribute("outline", this.outService.getOutlines(params));
-//        model.addAttribute("outline", new Outline());
+//        model.addAttribute("outline", this.outService.getOutlines(params));
+        model.addAttribute("outline", new Outline());
         return "outline-list";
     }
     

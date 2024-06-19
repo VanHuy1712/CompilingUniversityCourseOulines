@@ -7,11 +7,11 @@ const Register = () => {
     const fields = [{
         label: "Tên người dùng",
         type: "text",
-        field: "firstName"
+        field: "lastName"
     }, {
         label: "Họ và tên lót",
         type: "text",
-        field: "lastName"
+        field: "firstName"
     }, {
         label: "Email",
         type: "email",

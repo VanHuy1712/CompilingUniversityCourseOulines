@@ -85,11 +85,11 @@ public class Outline implements Serializable {
     private String description;
     @JoinColumn(name = "course_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
-    @JsonIgnore
+//    @JsonIgnore
     private Course course;
     @JoinColumn(name = "user_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
-    @JsonIgnore
+//    @JsonIgnore
     private User user;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "outline")
     @JsonIgnore

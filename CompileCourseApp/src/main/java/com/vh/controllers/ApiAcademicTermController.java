@@ -25,6 +25,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api")
 @CrossOrigin
 public class ApiAcademicTermController {
+    
     @Autowired
     private AcademicTermService ATermService;
     

@@ -33,6 +33,7 @@ public class ApiOutlineController {
     private OutlineService outlineService;
     
     @GetMapping("/outlines/")
+    @CrossOrigin
     public ResponseEntity<List<Outline>> list(@RequestParam  Map params) {
         return new ResponseEntity<>(this.outlineService.getOutlines(params), HttpStatus.OK);
     }

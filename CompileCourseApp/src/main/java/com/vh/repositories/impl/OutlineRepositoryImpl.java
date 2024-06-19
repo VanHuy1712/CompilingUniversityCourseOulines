@@ -103,7 +103,7 @@ public class OutlineRepositoryImpl implements OutlineRepository {
 //            predicates.add(b.equal(r.get("academicTerm"), Integer.parseInt(academicTermId)));
 //        }
         q.where(predicates.toArray(Predicate[]::new));
-        q.orderBy(b.desc(r.get("id")));
+//        q.orderBy(b.desc(r.get("id")));
 
         Query query = s.createQuery(q);
 
