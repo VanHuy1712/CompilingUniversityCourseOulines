@@ -10,7 +10,6 @@ import com.vh.services.UserService;
 import java.security.Principal;
 import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -32,6 +31,7 @@ import org.springframework.web.multipart.MultipartFile;
  */
 @RestController
 @RequestMapping("/api")
+@CrossOrigin
 public class ApiUserController {
     @Autowired
     private BCryptPasswordEncoder passswordEncoder;
@@ -40,13 +40,10 @@ public class ApiUserController {
     @Autowired
     private JwtService jwtService;
     
-    @PostMapping(path = "/users/", consumes = {
-        MediaType.APPLICATION_JSON_VALUE,
-        MediaType.MULTIPART_FORM_DATA_VALUE
-    })
+    @PostMapping(path = "/users/", consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.MULTIPART_FORM_DATA_VALUE})
     @CrossOrigin
     @ResponseStatus(HttpStatus.CREATED)
-    public void create(@RequestParam Map<String, String> params, @RequestPart MultipartFile[] files) {
+    public void create(@RequestParam Map<String, String> params, @RequestPart MultipartFile[] file) {
         User user = new User();
         user.setFirstName(params.get("firstName"));
         user.setLastName(params.get("lastName"));
@@ -55,10 +52,10 @@ public class ApiUserController {
         user.setEmail(params.get("email"));
         String password = params.get("password");
         user.setPassword(this.passswordEncoder.encode(password));
-        user.setUserRole("student");
+        user.setUserRole("ROLE_student");
         user.setActive(true);
-        if (files.length > 0)
-            user.setFile(files[0]);
+        if (file.length > 0)
+            user.setFile(file[0]);
         
         this.userService.addUser(user);
     }
@@ -75,7 +72,7 @@ public class ApiUserController {
         return new ResponseEntity<>("error", HttpStatus.BAD_REQUEST);
     }
     
-    @GetMapping(path = "/current-user/", produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(path = "/current-user/", produces = {MediaType.APPLICATION_JSON_VALUE})
     @CrossOrigin
     public ResponseEntity<User> getCurrentUser(Principal p) {
         User u = this.userService.getUserByUsername(p.getName());

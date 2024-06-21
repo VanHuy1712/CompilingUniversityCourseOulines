@@ -29,18 +29,21 @@
                 <c:choose>
                     <c:when test="${pageContext.request.userPrincipal.name == null}">
                         <li class="nav-item">
-                            <a class="nav-link text-info" href="<c:url value="/login" />">Đăng nhập</a>
+                            <a class=" btn btn-info " href="<c:url value="/login" />">Đăng nhập</a>
                         </li>
                     </c:when>
                     <c:when test="${pageContext.request.userPrincipal.name != null}">
                         <li class="nav-item">
-                            <a class="nav-link text-info" href="<c:url value="/" />">Chào ${pageContext.request.userPrincipal.name}!</a>
+                            <a class=" btn btn-danger " href="<c:url value="/" />">Chào ${pageContext.request.userPrincipal.name}!</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class=" btn btn-info " href="<c:url value="/logout" />">Đăng xuất</a>
                         </li>
                     </c:when>
                 </c:choose>
             </ul>
             <form action="<c:url value="/" />" class="d-flex ms-auto">
-                <input class="form-control me-2" name="kw" type="text" placeholder="Nhập tên...">
+                <input class="form-control me-2" name="kw" type="text" placeholder="Nhập tên môn học...">
                 <input class="form-control me-2" name="courseCredit" type="text" placeholder="Nhập tín chỉ...">
                 <input class="form-control me-2" name="teacherName" type="text" placeholder="Nhập tên giảng viên...">
                 <input class="form-control me-2" name="term" type="text" placeholder="Nhập khóa...">

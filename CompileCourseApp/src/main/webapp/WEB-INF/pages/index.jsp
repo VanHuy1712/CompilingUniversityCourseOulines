@@ -33,7 +33,7 @@
                     </c:if>
                 </c:forEach>
 
-                <td>${o.user.firstName} ${o.user.lastName}</td>
+                <td>${o.user.lastName} ${o.user.firstName}</td>
                 <td>${o.createDate}</td>
                 <td>
                     

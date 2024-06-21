@@ -7,11 +7,11 @@ const Register = () => {
     const fields = [{
         label: "Tên người dùng",
         type: "text",
-        field: "lastName"
+        field: "firstName"
     }, {
         label: "Họ và tên lót",
         type: "text",
-        field: "firstName"
+        field: "lastName"
     }, {
         label: "Email",
         type: "email",
@@ -47,13 +47,25 @@ const Register = () => {
     const register = async (e) => {
         e.preventDefault();
 
+        if (user.password !== user.confirm) {
+            console.error("Mật khẩu và xác nhận mật khẩu không khớp");
+            return;
+        }
+
         let form = new FormData();
         for (let key in user)
             if (key !== 'confirm')
                 form.append(key, user[key]);
 
         if (avatar)
-            form.append('file', avatar.current.files[0]);
+            form.append('file', avatar.current.file[0]);
+
+        // if (avatar.current && avatar.current.files[0])
+        //     form.append('file', avatar.current.files[0]);
+
+        for (let pair of form.entries()) {
+            console.log(pair[0] + ': ' + pair[1]);
+        }
 
         try {
             let res = await APIs.post(endpoints['register'], form, {

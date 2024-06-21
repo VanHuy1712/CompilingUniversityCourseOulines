@@ -66,16 +66,27 @@ public class OutlineRepositoryImpl implements OutlineRepository {
         if (courseCredit != null && !courseCredit.isEmpty()) {
             predicates.add(b.equal(r.get("credit"), Double.parseDouble(courseCredit)));
         }
-        
+
+//        String teacherName = params.get("teacherName");
+//        if (teacherName != null && !teacherName.isEmpty()) {
+//            predicates.add(b.like(r.get("user").get("lastName").as(String.class), "%" + teacherName + "%"));
+//        }
+//        
+//        if (teacherName != null && !teacherName.isEmpty()) {
+//            predicates.add(b.like(r.get("user").get("firstName").as(String.class), "%" + teacherName + "%"));
+//        }
         String teacherName = params.get("teacherName");
         if (teacherName != null && !teacherName.isEmpty()) {
-            predicates.add(b.like(r.get("user").get("lastName").as(String.class), "%" + teacherName + "%"));
+            Predicate lastNamePredicate = b.like(r.get("user").get("lastName").as(String.class), "%" + teacherName + "%");
+            Predicate firstNamePredicate = b.like(r.get("user").get("firstName").as(String.class), "%" + teacherName + "%");
+            Predicate namePredicate = b.or(firstNamePredicate, lastNamePredicate);
+            predicates.add(namePredicate);
         }
-        
+
         String term = params.get("term");
         if (term != null && !term.isEmpty()) {
             predicates.add(b.like(termJoind.get("academicId").get("name").as(String.class),
-                      "%" + term + "%"));
+                    "%" + term + "%"));
         }
 
         String outlineLanguage = params.get("outlineLanguage");
@@ -123,12 +134,13 @@ public class OutlineRepositoryImpl implements OutlineRepository {
     @Override
     public void addOrUpdate(Outline o) {
         Session s = this.factory.getObject().getCurrentSession();
-        if (o.getId() != null)
+        if (o.getId() != null) {
             s.update(o);
-        else
+        } else {
             s.save(o);
+        }
     }
-    
+
     @Override
     public Outline getOutlineById(int id) {
         Session s = this.factory.getObject().getCurrentSession();
@@ -202,7 +214,6 @@ public class OutlineRepositoryImpl implements OutlineRepository {
 //                      "%" + term + "%"));
 //        }
 //        q.where(predicate);
-
         q.where(predicates.toArray(Predicate[]::new));
         Query query = s.createQuery(q);
         List<Outline> sreachoutlines = query.getResultList();

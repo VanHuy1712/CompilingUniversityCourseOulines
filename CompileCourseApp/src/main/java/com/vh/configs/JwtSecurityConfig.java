@@ -24,11 +24,65 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
  *
  * @author Huy
  */
+//@Configuration
+//@EnableWebSecurity
+//@EnableTransactionManagement
+//@ComponentScan(basePackages = {
+//    "com.vn.controllers",
+//    "com.vh.repositories",
+//    "com.vh.services", 
+//    "com.vh.components"
+//})
+//@Order(1)
+//public class JwtSecurityConfig extends WebSecurityConfigurerAdapter {
+//    
+//    @Bean
+//    public JwtAuthenticationTokenFilter jwtAuthenticationTokenFilter() throws Exception {
+//        JwtAuthenticationTokenFilter jwtAuthenticationTokenFilter = new JwtAuthenticationTokenFilter();
+//        jwtAuthenticationTokenFilter.setAuthenticationManager(authenticationManager());
+//        return jwtAuthenticationTokenFilter;
+//    }
+//
+//    @Bean
+//    public RestAuthenticationEntryPoint restServicesEntryPoint() {
+//        return new RestAuthenticationEntryPoint();
+//    }
+//
+//    @Bean
+//    public CustomAccessDeniedHandler customAccessDeniedHandler() {
+//        return new CustomAccessDeniedHandler();
+//    }
+//
+//    @Bean
+//    @Override
+//    protected AuthenticationManager authenticationManager() throws Exception {
+//        return super.authenticationManager();
+//    }
+//
+//    @Override
+//    protected void configure(HttpSecurity http) throws Exception {
+//        http.csrf().ignoringAntMatchers("/api/**");
+//        http.authorizeRequests().antMatchers("/api/login/").permitAll();
+//        http.authorizeRequests().antMatchers("/api/outlines/").permitAll();
+//        http.authorizeRequests().antMatchers("/api/outlines/**").permitAll();
+//        http.authorizeRequests().antMatchers("/api/courses/").permitAll();
+//        http.authorizeRequests().antMatchers("/api/users/").permitAll();
+//        http.authorizeRequests().antMatchers(HttpMethod.GET, "/api/**/comments/").permitAll();
+//        http.antMatcher("/api/**").httpBasic().authenticationEntryPoint(restServicesEntryPoint()).and()
+//                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and().authorizeRequests()
+//                .antMatchers(HttpMethod.GET, "/api/**").access("hasRole('admin') or hasRole('student')")
+//                .antMatchers(HttpMethod.POST, "/api/**").access("hasRole('admin') or hasRole('student')")
+//                .antMatchers(HttpMethod.DELETE, "/api/**").access("hasRole('admin') or hasRole('student')").and()
+//                .addFilterBefore(jwtAuthenticationTokenFilter(), UsernamePasswordAuthenticationFilter.class)
+//                .exceptionHandling().accessDeniedHandler(customAccessDeniedHandler());
+//    }
+//}
+
 @Configuration
 @EnableWebSecurity
 @EnableTransactionManagement
 @ComponentScan(basePackages = {
-    "com.vn.controllers",
+    "com.vh.controllers",
     "com.vh.repositories",
     "com.vh.services", 
     "com.vh.components"
@@ -70,9 +124,9 @@ public class JwtSecurityConfig extends WebSecurityConfigurerAdapter {
         http.authorizeRequests().antMatchers(HttpMethod.GET, "/api/**/comments/").permitAll();
         http.antMatcher("/api/**").httpBasic().authenticationEntryPoint(restServicesEntryPoint()).and()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and().authorizeRequests()
-                .antMatchers(HttpMethod.GET, "/api/**").access("hasRole('admin') or hasRole('student')")
-                .antMatchers(HttpMethod.POST, "/api/**").access("hasRole('admin') or hasRole('student')")
-                .antMatchers(HttpMethod.DELETE, "/api/**").access("hasRole('admin') or hasRole('student')").and()
+                .antMatchers(HttpMethod.GET, "/api/**").access("hasRole('ROLE_admin') or hasRole('ROLE_student')")
+                .antMatchers(HttpMethod.POST, "/api/**").access("hasRole('ROLE_admin') or hasRole('ROLE_student')")
+                .antMatchers(HttpMethod.DELETE, "/api/**").access("hasRole('ROLE_admin') or hasRole('ROLE_student')").and()
                 .addFilterBefore(jwtAuthenticationTokenFilter(), UsernamePasswordAuthenticationFilter.class)
                 .exceptionHandling().accessDeniedHandler(customAccessDeniedHandler());
     }

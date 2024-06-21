@@ -68,7 +68,7 @@ const Header = () => {
                             {courses.map(c => <NavDropdown.Item key={c.id} href="#" onClick={e => search(e, c.id)}>{c.name}</NavDropdown.Item>)}
                         </NavDropdown>
 
-                        {/* {user===null?<>
+                        {user===null?<>
                             <Link to="/register" className="nav-link text-success">Đăng ký</Link>
                             <Link to="/login" className="nav-link text-info">Đăng nhập</Link>
                         </>:<>
@@ -76,7 +76,7 @@ const Header = () => {
                                 <Image src={user.avatar} width="40" roundedCircle /> {user.username}
                             </Link>
                             <Link onClick={() => dispatch({"type": "logout"})} className="nav-link">Đăng xuất</Link>
-                        </>} */}
+                        </>}
                        
 
                         {/* <Link to="/cart" className="nav-link">&#128722; <Badge bg="danger">0</Badge></Link> */}
