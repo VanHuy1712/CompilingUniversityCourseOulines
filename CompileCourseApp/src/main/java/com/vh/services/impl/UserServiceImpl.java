@@ -27,13 +27,59 @@ import org.springframework.stereotype.Service;
  *
  * @author Huy
  */
+//@Service("userDetailsService")
+//public class UserServiceImpl implements UserService{
+//    
+//    @Autowired
+//    private UserRepository userRepo;
+//    @Autowired
+//    private BCryptPasswordEncoder passEncoder;
+//    @Autowired
+//    private Cloudinary cloudinary;
+//
+//    @Override
+//    public User getUserByUsername(String username) {
+//        return this.userRepo.getUserByUsername(username);
+//    }
+//
+//    @Override
+//    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+//        User u = this.getUserByUsername(username);
+//        if (u == null) {
+//            throw new UsernameNotFoundException("Invalid username!");
+//        }
+//        Set<GrantedAuthority> authorities = new HashSet<>();
+//        authorities.add(new SimpleGrantedAuthority(u.getUserRole()));
+//        return new org.springframework.security.core.userdetails.User(
+//                u.getUsername(), u.getPassword(), authorities);
+//    }
+//
+//    @Override
+//    public void addUser(User user) {
+//        user.setPassword(passEncoder.encode(user.getPassword()).toString());
+//        if (!user.getFile().isEmpty()) {
+//            try {
+//                Map res = this.cloudinary.uploader().upload(user.getFile().getBytes(), ObjectUtils.asMap("resource_type", "auto"));
+//                user.setAvatar(res.get("secure_url").toString());
+//            } catch (IOException ex) {
+//                Logger.getLogger(UserServiceImpl.class.getName()).log(Level.SEVERE, null, ex);
+//            }
+//        }
+//        
+//        this.userRepo.addUser(user);
+//    }
+//
+//    @Override
+//    public boolean authUser(String username, String password) {
+//        return this.userRepo.authUser(username, password);
+//    }
+//}
+
 @Service("userDetailsService")
-public class UserServiceImpl implements UserService{
-    
+public class UserServiceImpl implements UserService {
+
     @Autowired
     private UserRepository userRepo;
-    @Autowired
-    private BCryptPasswordEncoder passEncoder;
     @Autowired
     private Cloudinary cloudinary;
 
@@ -44,19 +90,20 @@ public class UserServiceImpl implements UserService{
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        User u = this.getUserByUsername(username);
+        User u = this.userRepo.getUserByUsername(username);
         if (u == null) {
-            throw new UsernameNotFoundException("Invalid username!");
+            throw new UsernameNotFoundException("Không tồn tại!");
         }
+      
         Set<GrantedAuthority> authorities = new HashSet<>();
         authorities.add(new SimpleGrantedAuthority(u.getUserRole()));
+        
         return new org.springframework.security.core.userdetails.User(
                 u.getUsername(), u.getPassword(), authorities);
     }
 
     @Override
     public void addUser(User user) {
-        user.setPassword(passEncoder.encode(user.getPassword()).toString());
         if (!user.getFile().isEmpty()) {
             try {
                 Map res = this.cloudinary.uploader().upload(user.getFile().getBytes(), ObjectUtils.asMap("resource_type", "auto"));
@@ -67,6 +114,7 @@ public class UserServiceImpl implements UserService{
         }
         
         this.userRepo.addUser(user);
+        
     }
 
     @Override

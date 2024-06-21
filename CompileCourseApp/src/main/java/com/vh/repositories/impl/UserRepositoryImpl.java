@@ -30,6 +30,8 @@ public class UserRepositoryImpl implements UserRepository{
     public User getUserByUsername(String username) {
         Session s = this.factory.getObject().getCurrentSession();
         Query q = s.createQuery("From User Where username=:username");
+
+//        Query q = s.createQuery("FROM User u WHERE u.username = :username");
         q.setParameter("username", username);
         
         return (User) q.getSingleResult();
@@ -43,7 +45,7 @@ public class UserRepositoryImpl implements UserRepository{
 
     @Override
     public boolean authUser(String username, String password) {
-        User  u = this.getUserByUsername(username);
+        User u = this.getUserByUsername(username);
         
         return this.passEncoder.matches(password, u.getPassword());
     }

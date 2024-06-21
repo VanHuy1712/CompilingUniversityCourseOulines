@@ -95,6 +95,17 @@ public class User implements Serializable {
     public User(Integer id) {
         this.id = id;
     }
+    
+    public User(Integer id, String firstName, String lastName, String email, String phone, String username, String password, String userRole) {
+        this.id = id;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.phone = phone;
+        this.username = username;
+        this.password = password;
+        this.userRole = userRole;
+    }
 
     public Integer getId() {
         return id;
@@ -217,7 +228,9 @@ public class User implements Serializable {
     @Override
     public String toString() {
         return "com.vh.pojo.User[ id=" + id + " ]";
-    }/**
+    }
+    
+    /**
      * @return the file
      */
     public MultipartFile getFile() {
