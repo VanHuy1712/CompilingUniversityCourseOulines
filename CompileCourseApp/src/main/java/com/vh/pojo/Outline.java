@@ -7,6 +7,7 @@ package com.vh.pojo;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 import java.util.Set;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
@@ -28,6 +29,8 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.Transient;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
@@ -59,16 +62,20 @@ public class Outline implements Serializable {
     @Column(name = "create_date")
     @Temporal(TemporalType.TIMESTAMP)
     private Date createDate;
+    @NotBlank(message = "{outline.language.notBlank}")
     @Size(max = 45)
     @Column(name = "language")
     private String language;
+    @NotBlank(message = "{outline.teachingMethod.notBlank}")
     @Size(max = 45)
     @Column(name = "teching_method")
     private String techingMethod;
+    @NotBlank(message = "{outline.knowledge.notBlank}")
     @Size(max = 45)
     @Column(name = "knowledge")
     private String knowledge;
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
+    @NotNull(message = "{outline.credit.nullErr}")
     @Column(name = "credit")
     private Float credit;
     @Lob
@@ -83,6 +90,7 @@ public class Outline implements Serializable {
     @Size(max = 65535)
     @Column(name = "description")
     private String description;
+    @NotNull(message = "{outline.course.nullErr}")
     @JoinColumn(name = "course_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
 //    @JsonIgnore
@@ -103,7 +111,7 @@ public class Outline implements Serializable {
 //    @OneToMany(cascade = CascadeType.ALL, mappedBy = "productId")
 //    @JsonIgnore
 //    private Set<ProdTag> prodTagSet;
-    
+
     @Transient
     private MultipartFile file;
 
@@ -185,7 +193,7 @@ public class Outline implements Serializable {
     public void setDescription(String description) {
         this.description = description;
     }
-    
+
     @XmlTransient
     public Set<OutlineTerm> getOutlineTermSet() {
         return outlineTermSet;
@@ -203,7 +211,6 @@ public class Outline implements Serializable {
 //    public void setAcademicTermSet(Set<AcademicTerm> academicTermSet) {
 //        this.academicTermSet = academicTermSet;
 //    }
-
     public Course getCourse() {
         return course;
     }
@@ -262,16 +269,16 @@ public class Outline implements Serializable {
     public String toString() {
         return "com.vh.pojo.Outline[ id=" + id + " ]";
     }
-    
+
     public MultipartFile getFile() {
         return file;
     }
-    
+
     /**
      * @param file the file to set
      */
     public void setFile(MultipartFile file) {
         this.file = file;
     }
-    
+
 }

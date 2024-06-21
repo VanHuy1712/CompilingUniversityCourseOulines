@@ -35,14 +35,14 @@ public class OutlineServiceImpl implements OutlineService{
 
     @Override
     public void addOrUpdate(Outline o) {
-        if (!o.getFile().isEmpty()) {
-            try {
-                Map res = this.cloudinary.uploader().upload(o.getFile().getBytes(), ObjectUtils.asMap("resource_type", "auto"));
-//                o.setImage(res.get("secure_url").toString());
-            } catch (IOException ex) {
-                Logger.getLogger(OutlineServiceImpl.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        }
+//        if (!o.getFile().isEmpty()) {
+//            try {
+//                Map res = this.cloudinary.uploader().upload(o.getFile().getBytes(), ObjectUtils.asMap("resource_type", "auto"));
+////                o.setImage(res.get("secure_url").toString());
+//            } catch (IOException ex) {
+//                Logger.getLogger(OutlineServiceImpl.class.getName()).log(Level.SEVERE, null, ex);
+//            }
+//        }
         
         this.outlineRepo.addOrUpdate(o);
     }

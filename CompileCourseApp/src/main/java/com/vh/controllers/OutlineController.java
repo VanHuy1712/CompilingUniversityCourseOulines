@@ -7,6 +7,8 @@ package com.vh.controllers;
 import com.vh.pojo.Outline;
 import com.vh.services.OutlineMethodService;
 import com.vh.services.OutlineService;
+import com.vh.services.UserService;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import javax.validation.Valid;
@@ -34,6 +36,9 @@ public class OutlineController {
     @Autowired
     private OutlineMethodService outlineMethodService;
 
+    @Autowired
+    private UserService userService;
+
     @GetMapping("/outline/{outlineId}")
     public String detailView(Model model, @PathVariable(value = "outlineId") int id) {
         model.addAttribute("outline", this.outService.getOutlineById(id));
@@ -41,35 +46,39 @@ public class OutlineController {
 
         return "outline-detail";
     }
-    
+
     @GetMapping("/outlines/{outlineId}")
     public String uploadOutlineView(Model model, @PathVariable(value = "outlineId") int id) {
-        model.addAttribute("outline", this.outService.getOutlineById(id));
+        model.addAttribute("compilation", this.outService.getOutlineById(id));
 
         return "outline-list";
     }
-    
+
     @GetMapping("/outlines")
     public String addOutlineView(Model model, @RequestParam Map<String, String> params) {
-//        model.addAttribute("outline", this.outService.getOutlines(params));
-        model.addAttribute("outline", new Outline());
+        model.addAttribute("outline", this.outService.getOutlines(params));
+
+        Outline outline = new Outline();
+        model.addAttribute("compilation", outline);
+
         return "outline-list";
     }
-    
+
     @PostMapping("/outlines")
-    public String addOutlineProcess(Model model, @ModelAttribute(value = "outline") @Valid Outline o,
+    public String addOutlineProcess(Model model, @ModelAttribute(value = "compilation") @Valid Outline o,
             BindingResult rs) {
-       
+
         if (!rs.hasErrors()) {
             try {
-                this.outService.addOrUpdate(o);
-                
-                return "redirect:/";
+                o.setCreateDate(new Date()); // Đặt ngày hiện tại
+            o.setUser(userService.getUserById(1));
+            this.outService.addOrUpdate(o);
+
+            return "redirect:/";
             } catch (Exception ex) {
-                model.addAttribute("errMsg", ex.toString());
+                System.err.println(ex.getMessage());
             }
         }
-        
         return "outline-list";
     }
 

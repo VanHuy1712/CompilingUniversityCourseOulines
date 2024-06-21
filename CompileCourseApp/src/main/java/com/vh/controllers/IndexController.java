@@ -11,6 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.RequestMapping;
 import com.vh.services.CourseService;
+import com.vh.services.EvaluationMethodService;
 import com.vh.services.OutlineService;
 import com.vh.services.UserService;
 import com.vh.services.OutlineTermService;
@@ -28,9 +29,8 @@ public class IndexController {
 
     @Autowired
     private CourseService courseService;
-    
+
 //    private UserService userService;
-    
 //    @ModelAttribute
 //    public void commonAttr(Model model) {
 //        model.addAttribute("users", this.userService.);
@@ -41,18 +41,20 @@ public class IndexController {
     private OutlineTermService outlineTermService;
     @Autowired
     private AcademicTermService academicTermService;
-    
-//    @ModelAttribute
-//    public void commonAttr(Model model){
-//        model.addAttribute("courses", this.courseService.getCourses());
-//    }
-    
-    @RequestMapping("/")
-    public String index(Model model, @RequestParam Map<String, String> params) {
+    @Autowired
+    private EvaluationMethodService evaluationMethodService;
+
+    @ModelAttribute
+    public void commonAttr(Model model) {
         model.addAttribute("courses", this.courseService.getCourses());
-        model.addAttribute("outlines", this.outlineService.getOutlines(params));
         model.addAttribute("outlineTerms", this.outlineTermService.getOutlineTerm());
         model.addAttribute("academicTerms", this.academicTermService.getAcademicTerms());
+        model.addAttribute("evaluationMethods", this.evaluationMethodService.getEvaluationMethods());
+    }
+
+    @RequestMapping("/")
+    public String index(Model model, @RequestParam Map<String, String> params) {
+        model.addAttribute("outlines", this.outlineService.getOutlines(params));
 
         return "index";
     }

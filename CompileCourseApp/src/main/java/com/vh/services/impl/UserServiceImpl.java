@@ -121,4 +121,9 @@ public class UserServiceImpl implements UserService {
     public boolean authUser(String username, String password) {
         return this.userRepo.authUser(username, password);
     }
+
+    @Override
+    public User getUserById(int id) {
+        return this.userRepo.getUserById(id);
+    }
 }
