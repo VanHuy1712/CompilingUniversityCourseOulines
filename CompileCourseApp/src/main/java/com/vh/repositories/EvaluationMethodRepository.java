@@ -4,15 +4,13 @@
  */
 package com.vh.repositories;
 
-import com.vh.pojo.User;
+import com.vh.pojo.EvaluationMethod;
+import java.util.List;
 
 /**
  *
- * @author Huy
+ * @author DELL
  */
-public interface UserRepository {
-    User getUserByUsername(String username);
-    void addUser(User user);
-    boolean authUser(String username, String password);
-    User getUserById(int id);
+public interface EvaluationMethodRepository {
+    List<EvaluationMethod> getEvaluationMethods();
 }

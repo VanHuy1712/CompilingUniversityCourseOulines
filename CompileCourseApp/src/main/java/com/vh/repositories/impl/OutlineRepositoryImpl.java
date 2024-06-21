@@ -4,7 +4,6 @@
  */
 package com.vh.repositories.impl;
 
-import com.vh.pojo.AcademicTerm;
 import com.vh.pojo.Course;
 import com.vh.pojo.Outline;
 import com.vh.pojo.OutlineTerm;
@@ -123,9 +122,10 @@ public class OutlineRepositoryImpl implements OutlineRepository {
     @Override
     public void addOrUpdate(Outline o) {
         Session s = this.factory.getObject().getCurrentSession();
-        if (o.getId() != null)
+        if (o.getId() != null){
             s.update(o);
-        else
+            
+        }else
             s.save(o);
     }
     
