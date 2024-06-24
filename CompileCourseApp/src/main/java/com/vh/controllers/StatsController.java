@@ -25,10 +25,10 @@ public class StatsController {
     public String stats(Model model, @RequestParam Map<String, String> params) {
         model.addAttribute("statsRevenue", this.statsService.statsRevenueByOutline());
         
-        String peroid = params.getOrDefault("peroid", "MONTH");
-        String year = params.getOrDefault("year", String.valueOf(LocalDate.now().getYear()));
-        model.addAttribute("statsRevenueByPeroid", 
-                this.statsService.statsRevenueByPeriod(Integer.parseInt(year), peroid));
+//        String period = params.getOrDefault("period", "MONTH");
+//        String year = params.getOrDefault("year", String.valueOf(LocalDate.now().getYear()));
+//        model.addAttribute("statsRevenueByPeriod", 
+//                this.statsService.statsRevenueByPeriod(Integer.parseInt(year), period));
         
         return "stats";
     }

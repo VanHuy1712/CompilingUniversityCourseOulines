@@ -14,11 +14,11 @@
     </definition>
     <definition name="outline-detail" extends="baseLayout">
         <put-attribute name="title" value="Đề cương" />
-        <put-attribute name="content" value="/WEB-INF/pages/outline.jsp" />
+        <put-attribute name="content" value="/WEB-INF/pages/outlinedetail.jsp" />
     </definition>
     <definition name="outline-list" extends="baseLayout">
         <put-attribute name="title" value="Đề cương" />
-        <put-attribute name="content" value="/WEB-INF/pages/outlineapi.jsp" />
+        <put-attribute name="content" value="/WEB-INF/pages/outline.jsp" />
     </definition>
     <definition name="stats" extends="baseLayout">
         <put-attribute name="title" value="Thống kê báo cáo" />

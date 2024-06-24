@@ -21,7 +21,7 @@ public class StatsServiceImpl implements StatsService{
     
     @Override
     public List<Object[]> statsRevenueByOutline() {
-        return this.statsRepo.statsRevenueByAcademicTerm();
+        return this.statsRepo.statsRevenueByOutline();
     }
 
     @Override
