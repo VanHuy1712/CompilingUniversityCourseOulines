@@ -24,6 +24,7 @@ public class StatsController {
     @GetMapping("/stats")
     public String stats(Model model, @RequestParam Map<String, String> params) {
         model.addAttribute("statsRevenue", this.statsService.statsRevenueByOutline());
+        model.addAttribute("statsRevenueTeacher", this.statsService.statsRevenueTeacher());
         
 //        String period = params.getOrDefault("period", "MONTH");
 //        String year = params.getOrDefault("year", String.valueOf(LocalDate.now().getYear()));

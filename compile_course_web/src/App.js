@@ -26,7 +26,7 @@ const App = () => {
             </Routes>
           </MyDispatchContext.Provider>
         </MyUserContext.Provider>
-        {/* <Footer /> */}
+            <Footer />
       </BrowserRouter>
     );
 }

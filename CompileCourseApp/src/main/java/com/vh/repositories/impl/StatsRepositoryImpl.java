@@ -8,12 +8,14 @@ import com.vh.pojo.AcademicTerm;
 import com.vh.pojo.Course;
 import com.vh.pojo.Outline;
 import com.vh.pojo.OutlineTerm;
+import com.vh.pojo.User;
 import com.vh.repositories.StatsRepository;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.Query;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Expression;
 import javax.persistence.criteria.Join;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
@@ -91,6 +93,31 @@ public class StatsRepositoryImpl implements StatsRepository {
         Query query = s.createQuery(q);
         return query.getResultList();
 
+    }
+
+    @Override
+    public List<Object[]> statsRevenueTeacher() {
+        Session s = this.factory.getObject().getCurrentSession();
+        CriteriaBuilder b = s.getCriteriaBuilder();
+        CriteriaQuery<Object[]> q = b.createQuery(Object[].class);
+
+        Root rO = q.from(Outline.class);
+        Root rT = q.from(User.class);
+        
+        Expression<String> fullName = b.concat(rT.get("lastName"), b.concat(" ", rT.get("firstName")));
+
+        q.multiselect(fullName, b.count(rO.get("id")));
+
+        List<Predicate> predicates = new ArrayList<>();
+        predicates.add(b.equal(rO.get("user"), rT.get("id")));
+
+        q.where(predicates.toArray(new Predicate[0]));
+
+        // Nhóm theo tên khóa học
+        q.groupBy(fullName);
+
+        Query query = s.createQuery(q);
+        return query.getResultList();
     }
 
 }

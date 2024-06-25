@@ -12,5 +12,6 @@ import java.util.List;
  */
 public interface StatsRepository {
     List<Object[]> statsRevenueByOutline();
+    List<Object[]> statsRevenueTeacher();
     List<Object[]> statsRevenueByPeriod(int year, String period);
 }

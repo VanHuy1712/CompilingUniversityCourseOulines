@@ -98,10 +98,11 @@ public class OutlineRepositoryImpl implements OutlineRepository {
             predicates.add(b.like(r.get("teching_method"), String.format("%%%s%%", outlineTeachMethod)));
         }
 
-//        String courseId = params.get("courseId");
-//        if (courseId != null && !courseId.isEmpty()) {
-//            predicates.add(b.equal(r.get("courseId"), Integer.parseInt(courseId)));
-//        }
+        String courseId = params.get("courseId");
+        if (courseId != null && !courseId.isEmpty()) {
+            predicates.add(b.equal(r.get("course"), Integer.parseInt(courseId)));
+        }
+        
         String userId = params.get("userId");
         if (userId != null && !userId.isEmpty()) {
 //            predicates.add(b.equal(r.get("user").get("lastName").as(String.class), "%" + userId + "%"));

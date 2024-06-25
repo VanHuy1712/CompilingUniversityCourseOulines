@@ -28,5 +28,10 @@ public class StatsServiceImpl implements StatsService{
     public List<Object[]> statsRevenueByPeriod(int year, String period) {
         return this.statsRepo.statsRevenueByPeriod(year, period);
     }
+
+    @Override
+    public List<Object[]> statsRevenueTeacher() {
+        return this.statsRepo.statsRevenueTeacher();
+    }
     
 }

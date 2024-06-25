@@ -28,6 +28,26 @@
         <canvas id="myChart1"></canvas>
     </div>
 </div>
+<div class="row">
+    <div class="col-md-5 col-12">
+        <table class="table">
+            <tr>
+                <th>Tên giảng viên</th>
+                <th>Số lượng đề cương</th>
+            </tr>
+            <c:forEach items="${statsRevenueTeacher}" var="s">
+                <tr>
+                    <td>${s[0]}</td>
+                    <td>${s[1]}</td>
+                    <!--<td>${s[2]}</td>-->
+                </tr>
+            </c:forEach>
+        </table>
+    </div>
+    <div class="col-md-7 col-12">
+        <canvas id="myChart2"></canvas>
+    </div>
+</div>
 
 <!--<div class="row">
     <div class="col-md-5 col-12">
@@ -83,6 +103,13 @@
     labels.push('${s[0]}');
     data.push(${s[1]});
     </c:forEach>
+        
+    let labels2 = [];
+    let data2 = [];
+    <c:forEach items="${statsRevenueTeacher}" var="s">
+    labels2.push('${s[0]}');
+    data2.push(${s[1]});
+    </c:forEach>
 
     
     function drawChart(ctx, labels, data) {
@@ -112,7 +139,7 @@
         let ctx2 = document.getElementById("myChart2");
 
         drawChart(ctx1, labels, data);
-        drawChart(ctx2, label2, data2);
+        drawChart(ctx2, labels2, data2);
     }
 </script>
 

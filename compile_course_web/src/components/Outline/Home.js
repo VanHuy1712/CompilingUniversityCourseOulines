@@ -12,10 +12,18 @@ const Home = () => {
     const nav = useNavigate();
     const [q, ] = useSearchParams();
 
+
     const loadOutlines = async () => {
+
         setLoading(true)
         try {
             let url = `${endpoints['outlines']}?page=${page}`;
+
+            let courseId = q.get('courseId')
+            if (courseId) {
+                setPage(1);
+                url = `${url}&courseId=${courseId}`;
+            }
 
             let kw = q.get("kw");
             if (kw) {

@@ -50,6 +50,8 @@ const Header = () => {
         const query = `/?kw=${q}&courseCredit=${q1}&teacherName=${q2}&term=${q3}`;
         nav(query);
     }
+
+    
              
 
         return (
