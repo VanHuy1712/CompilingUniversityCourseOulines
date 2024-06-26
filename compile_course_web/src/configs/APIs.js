@@ -7,6 +7,7 @@ export const endpoints = {
     'courses': '/api/courses/', 
     'outlines': '/api/outlines/',
     'details': (outlineId) => `/api/outlines/${outlineId}/`,
+    'outlineMethod': '/api/outlinemethods/',
     'register': '/api/users/',
     'login': '/api/login/',
     'current-user': '/api/current-user/'

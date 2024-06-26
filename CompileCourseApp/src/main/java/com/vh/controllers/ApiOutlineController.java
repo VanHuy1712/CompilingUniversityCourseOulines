@@ -5,6 +5,8 @@
 package com.vh.controllers;
 
 import com.vh.pojo.Outline;
+import com.vh.pojo.OutlineMethod;
+import com.vh.services.OutlineMethodService;
 import com.vh.services.OutlineService;
 import java.util.List;
 import java.util.Map;
@@ -29,26 +31,27 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api")
 @CrossOrigin
 public class ApiOutlineController {
+
     @Autowired
     private OutlineService outlineService;
-    
+
     @GetMapping("/outlines/")
     @CrossOrigin
-    public ResponseEntity<List<Outline>> list(@RequestParam  Map params) {
+    public ResponseEntity<List<Outline>> list(@RequestParam Map params) {
         return new ResponseEntity<>(this.outlineService.getOutlines(params), HttpStatus.OK);
     }
-    
+
     @GetMapping(path = "/outlines/{outlineId}/", produces = {MediaType.APPLICATION_JSON_VALUE})
     public ResponseEntity<Outline> retrieve(@PathVariable(value = "outlineId") int id) {
         return new ResponseEntity<>(this.outlineService.getOutlineById(id), HttpStatus.OK);
     }
-    
+
     @DeleteMapping("/outlines/{outlineId}/")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void destroy(@PathVariable(value = "outlineId") int id) {
         this.outlineService.deleteOutline(id);
     }
-    
+
 //    @GetMapping("/sreachoutlines/")
 //    public ResponseEntity<List<Outline>> sreachOutlines(
 //            @RequestParam(required = false) String nameCourse,
