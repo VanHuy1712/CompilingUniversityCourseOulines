@@ -58,7 +58,7 @@ const Register = () => {
                 form.append(key, user[key]);
 
         if (avatar)
-            form.append('file', avatar.current.file[0]);
+            form.append('file', avatar.current.files[0]);
 
         // if (avatar.current && avatar.current.files[0])
         //     form.append('file', avatar.current.files[0]);
