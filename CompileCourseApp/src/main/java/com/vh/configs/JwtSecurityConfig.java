@@ -125,9 +125,9 @@ public class JwtSecurityConfig extends WebSecurityConfigurerAdapter {
         http.authorizeRequests().antMatchers(HttpMethod.GET, "/api/**/comments/").permitAll();
         http.antMatcher("/api/**").httpBasic().authenticationEntryPoint(restServicesEntryPoint()).and()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and().authorizeRequests()
-                .antMatchers(HttpMethod.GET, "/api/**").access("hasRole('ROLE_admin') or hasRole('ROLE_student')")
-                .antMatchers(HttpMethod.POST, "/api/**").access("hasRole('ROLE_admin') or hasRole('ROLE_student')")
-                .antMatchers(HttpMethod.DELETE, "/api/**").access("hasRole('ROLE_admin') or hasRole('ROLE_student')").and()
+                .antMatchers(HttpMethod.GET, "/api/**").access("hasRole('ROLE_admin') or hasRole('ROLE_student') or hasRole('ROLE_teacher')")
+                .antMatchers(HttpMethod.POST, "/api/**").access("hasRole('ROLE_admin') or hasRole('ROLE_student') or hasRole('ROLE_teacher')")
+                .antMatchers(HttpMethod.DELETE, "/api/**").access("hasRole('ROLE_admin') or hasRole('ROLE_student') or hasRole('ROLE_teacher')").and()
                 .addFilterBefore(jwtAuthenticationTokenFilter(), UsernamePasswordAuthenticationFilter.class)
                 .exceptionHandling().accessDeniedHandler(customAccessDeniedHandler());
     }
