@@ -52,11 +52,11 @@ public class Comment implements Serializable {
     private Date dayPost;
     @JoinColumn(name = "outline_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
-    @JsonIgnore
+//    @JsonIgnore
     private Outline outline;
     @JoinColumn(name = "user_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
-    @JsonIgnore
+//    @JsonIgnore
     private User user;
 
     public Comment() {

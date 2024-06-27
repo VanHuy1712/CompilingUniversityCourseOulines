@@ -70,10 +70,7 @@ public class OutlineRepositoryImpl implements OutlineRepository {
 //        if (teacherName != null && !teacherName.isEmpty()) {
 //            predicates.add(b.like(r.get("user").get("lastName").as(String.class), "%" + teacherName + "%"));
 //        }
-//        
-//        if (teacherName != null && !teacherName.isEmpty()) {
-//            predicates.add(b.like(r.get("user").get("firstName").as(String.class), "%" + teacherName + "%"));
-//        }
+
         String teacherName = params.get("teacherName");
         if (teacherName != null && !teacherName.isEmpty()) {
             Predicate lastNamePredicate = b.like(r.get("user").get("lastName").as(String.class), "%" + teacherName + "%");
@@ -144,8 +141,8 @@ public class OutlineRepositoryImpl implements OutlineRepository {
     @Override
     public Outline getOutlineById(int id) {
         Session s = this.factory.getObject().getCurrentSession();
-        return s.get(Outline.class, id);
-    }
+       return s.get(Outline.class, id);
+    } 
 
     @Override
     public void deleteOutline(int id) {
