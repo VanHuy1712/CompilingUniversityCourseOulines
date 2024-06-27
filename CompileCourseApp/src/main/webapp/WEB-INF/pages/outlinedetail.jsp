@@ -4,7 +4,7 @@
 --%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<h1 class="text-center text-info mt-1">ĐỀ CƯƠNG MÔN HỌC</h1>
+<h1 class="text-center text-info mt-1">ĐỀ CƯƠNG MÔN HỌC</h1>/
 <div class="section">
     <div class="section-title"><strong>I. Thông Tin Tổng Quát</strong></div> <br>
     <div class="content">

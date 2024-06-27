@@ -76,7 +76,7 @@ public class User implements Serializable {
     @Size(max = 100)
     @Column(name = "avatar")
     private String avatar;
-    @Size(max = 10)
+    @Size(max = 15)
     @Column(name = "user_role")
     private String userRole;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
