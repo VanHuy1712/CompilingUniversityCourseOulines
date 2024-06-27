@@ -23,10 +23,10 @@
 
     <div class="form-floating mb-3">
         <form:select class="form-select" path="course">
-            <form:option value="" label="-- Chọn môn học --"/>
+            <label for="course" class="form-label"><strong>Môn học:</strong></label>
+            <option value="">-- Chọn Môn Học --</option>
             <form:options items="${courses}" itemValue="id" itemLabel="name" />
         </form:select>
-        <label for="course" class="form-label">Môn học:</label>
     </div>
 
 
@@ -34,7 +34,7 @@
     <div class="form-floating mb-3">
         <c:forEach items="${compilation.outlineTermSet}" var="outlineTerm" varStatus="status">
             <div class="form-group mb-3 outline-term">
-                <label for="academicId" class="form-label">Khóa học:</label>
+                <label for="academicId" class="form-label"><strong>Khóa học:</strong></label>
                 <select class="form-select" name="outlineTermSet[${status.index}].academicId.id">
                     <option value="">-- Chọn khóa học --</option>
                     <c:forEach items="${academicTerms}" var="term">
@@ -56,21 +56,21 @@
     <c:choose>
         <c:when test="${compilation.id > 0}">
             <div class="form-group mb-3 mt-3">
-                <label>Ngôn ngữ:</label><br>
+                <label><strong>Ngôn Ngữ:</strong></label><br>
                 <form:radiobutton path="language" value="Vietnamese" label="Vietnamese" checked="${compilation.language == 'Vietnamese'}"/>
                 <form:radiobutton path="language" value="English" label="English" checked="${compilation.language == 'English'}"/>
                 <form:radiobutton path="language" value="Both" label="Both" checked="${compilation.language == 'Both'}"/>
             </div>
 
             <div class="form-group mb-3 mt-3">
-                <label>Phương pháp giảng dạy:</label><br>
+                <label><strong>Phương Pháp Giảng Dạy:</strong></label><br>
                 <form:radiobutton path="techingMethod" value="FTF" label="FTF" checked="${compilation.techingMethod == 'FTF'}"/>
                 <form:radiobutton path="techingMethod" value="Online" label="Online" checked="${compilation.techingMethod == 'Online'}"/>
                 <form:radiobutton path="techingMethod" value="Blended" label="Blended" checked="${compilation.techingMethod == 'Blended'}"/>
             </div>
 
             <div class="form-group mb-3 mt-3">
-                <label>Kiến thức:</label><br>
+                <label><strong>Kiến Thức:</strong></label><br>
                 <form:radiobutton path="knowledge" value="General" label="General" checked="${compilation.knowledge == 'General'}"/>
                 <form:radiobutton path="knowledge" value="Foundation" label="Foundation" checked="${compilation.knowledge == 'Foundation'}"/>
                 <form:radiobutton path="knowledge" value="Discipline" label="Discipline" checked="${compilation.knowledge == 'Discipline'}"/>
@@ -81,21 +81,21 @@
         </c:when>
         <c:otherwise>
             <div class="form-group mb-3 mt-3">
-                <label>Ngôn ngữ:</label><br>
+                <label><strong>Ngôn Ngữ:</strong></label><br>
                 <form:radiobutton path="language" value="Vietnamese" label="Vietnamese"/>
                 <form:radiobutton path="language" value="English" label="English"/>
                 <form:radiobutton path="language" value="Both" label="Both"/>
             </div>
 
             <div class="form-group mb-3 mt-3">
-                <label>Phương pháp giảng dạy:</label><br>
+                <label><strong>Phương Pháp Giảng Dạy:</strong></label><br>
                 <form:radiobutton path="techingMethod" value="FTF" label="FTF"/>
                 <form:radiobutton path="techingMethod" value="Online" label="Online"/>
                 <form:radiobutton path="techingMethod" value="Blended" label="Blended"/>
             </div>
 
             <div class="form-group mb-3 mt-3">
-                <label>Kiến thức:</label><br>
+                <strong>Kiến Thức:</strong><br>
                 <form:radiobutton path="knowledge" value="General" label="General"/>
                 <form:radiobutton path="knowledge" value="Foundation" label="Foundation"/>
                 <form:radiobutton path="knowledge" value="Discipline" label="Discipline"/>
@@ -103,7 +103,6 @@
                 <form:radiobutton path="knowledge" value="Additional" label="Additional"/>
                 <form:radiobutton path="knowledge" value="GraduationThesis" label="Graduation Thesis"/>
             </div>
-
         </c:otherwise>
     </c:choose>
 
@@ -137,8 +136,8 @@
             <tbody id="outlineMethodRows">
                 <c:forEach items="${compilation.outlineMethodSet}" var="outlineMethod" varStatus="status">
                     <tr>
-                        <td><form:input path="outlineMethodSet[${status.index}].name" class="form-control"/></td>
-                        <td><form:input path="outlineMethodSet[${status.index}].weight" class="form-control"/></td>
+                        <td><form:input path="outlineMethodSet[${status.index}].name" class="form-control" placeholder="Nhập tên bài đánh giá"/></td>
+                        <td><form:input path="outlineMethodSet[${status.index}].weight" class="form-control" placeholder="Nhập tỷ lệ"/></td>
                         <td>
                             <form:select path="outlineMethodSet[${status.index}].evaluationMethod.id" class="form-select">
                                 <form:option value="">-- Chọn phương pháp đánh giá --</form:option>
@@ -179,8 +178,8 @@
                 if (index < 5) { // Maximum 5 rows
                     const newRow = `
         <tr>
-            <td><input type="text" class="form-control" name="outlineMethodSet[${index}].name" /></td>
-            <td><input type="text" class="form-control" name="outlineMethodSet[${index}].weight" /></td>
+            <td><input type="text" class="form-control" name="outlineMethodSet[${index}].name" placeholder="Nhập tên bài đánh giá"/></td>
+            <td><input type="text" class="form-control" name="outlineMethodSet[${index}].weight" placeholder="Nhập tỷ lệ" /></td>
             <td>
                 <select class="form-select" name="outlineMethodSet[${index}].evaluationMethod.id">
                     <option value="">-- Chọn phương pháp đánh giá --</option>
@@ -195,7 +194,7 @@
                     outlineMethodRows.insertAdjacentHTML('beforeend', newRow);
                     index++; // Increment index for the next row
                 } else {
-                    alert('You can only add up to 5 evaluation methods.');
+                    alert('Bạn chỉ có thể có tối đa 5 cột điểm!');
                 }
             });
 
@@ -209,4 +208,5 @@
         });
     </script>
 </form:form>
+<link rel="stylesheet" href="<c:url value="/css/styles.css" />" />
 
