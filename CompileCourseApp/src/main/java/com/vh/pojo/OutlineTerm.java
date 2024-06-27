@@ -20,6 +20,7 @@ import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
@@ -46,6 +47,7 @@ public class OutlineTerm implements Serializable {
     private Date createdDate;
     @JoinColumn(name = "academic_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
+    @NotNull(message = "{outlineTerm.academicId.notNull}")
     private AcademicTerm academicId;
     @JoinColumn(name = "outline_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
