@@ -20,6 +20,7 @@ import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
@@ -44,6 +45,7 @@ public class OutlineTerm implements Serializable {
     @Column(name = "created_date")
     @Temporal(TemporalType.TIMESTAMP)
     private Date createdDate;
+    @NotNull(message = "{outlineTerm.academicId.NullErr}")
     @JoinColumn(name = "academic_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private AcademicTerm academicId;

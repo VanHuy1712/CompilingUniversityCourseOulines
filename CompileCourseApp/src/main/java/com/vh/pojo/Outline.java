@@ -6,6 +6,7 @@ package com.vh.pojo;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Set;
@@ -13,6 +14,7 @@ import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -30,10 +32,13 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.Transient;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 import org.springframework.web.multipart.MultipartFile;
 
 /**
@@ -99,15 +104,16 @@ public class Outline implements Serializable {
     @ManyToOne(optional = false)
 //    @JsonIgnore
     private User user;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "outline")
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "outline")
     @JsonIgnore
-    private Set<OutlineMethod> outlineMethodSet;
+    private List<OutlineMethod> outlineMethodSet = new ArrayList<>();
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "outline")
     @JsonIgnore
     private Set<Comment> commentSet;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "outlineId")
+    @LazyCollection(LazyCollectionOption.FALSE)
     @JsonIgnore
-    private Set<OutlineTerm> outlineTermSet;
+    private List<OutlineTerm> outlineTermSet = new ArrayList<>();
 //    @OneToMany(cascade = CascadeType.ALL, mappedBy = "productId")
 //    @JsonIgnore
 //    private Set<ProdTag> prodTagSet;
@@ -195,11 +201,11 @@ public class Outline implements Serializable {
     }
 
     @XmlTransient
-    public Set<OutlineTerm> getOutlineTermSet() {
+    public List<OutlineTerm> getOutlineTermSet() {
         return outlineTermSet;
     }
 
-    public void setOrderDetailSet(Set<OutlineTerm> outlineTermSet) {
+    public void setOrderDetailSet(List<OutlineTerm> outlineTermSet) {
         this.outlineTermSet = outlineTermSet;
     }
 
@@ -228,11 +234,11 @@ public class Outline implements Serializable {
     }
 
     @XmlTransient
-    public Set<OutlineMethod> getOutlineMethodSet() {
+    public List<OutlineMethod> getOutlineMethodSet() {
         return outlineMethodSet;
     }
 
-    public void setOutlineMethodSet(Set<OutlineMethod> outlineMethodSet) {
+    public void setOutlineMethodSet(List<OutlineMethod> outlineMethodSet) {
         this.outlineMethodSet = outlineMethodSet;
     }
 

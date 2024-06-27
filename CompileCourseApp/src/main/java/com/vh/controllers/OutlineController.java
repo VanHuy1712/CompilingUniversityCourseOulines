@@ -5,6 +5,8 @@
 package com.vh.controllers;
 
 import com.vh.pojo.Outline;
+import com.vh.pojo.OutlineMethod;
+import com.vh.pojo.OutlineTerm;
 import com.vh.services.OutlineMethodService;
 import com.vh.services.OutlineService;
 import com.vh.services.UserService;
@@ -59,6 +61,10 @@ public class OutlineController {
         model.addAttribute("outline", this.outService.getOutlines(params));
 
         Outline outline = new Outline();
+        outline.getOutlineTermSet().add(new OutlineTerm());
+        for (int i = 0; i < 3; i++) {
+            outline.getOutlineMethodSet().add(new OutlineMethod());
+        }
         model.addAttribute("compilation", outline);
 
         return "outline-list";
@@ -71,10 +77,19 @@ public class OutlineController {
         if (!rs.hasErrors()) {
             try {
                 o.setCreateDate(new Date()); // Đặt ngày hiện tại
-            o.setUser(userService.getUserById(1));
-            this.outService.addOrUpdate(o);
+                o.setUser(userService.getUserById(1));
+                
+                for (OutlineTerm term : o.getOutlineTermSet()) {
+                    term.setCreatedDate(new Date());
+                    term.setOutlineId(o);
+                }
+                for (OutlineMethod method : o.getOutlineMethodSet()) {
+                    if(method.getEvaluationMethod()!= null)
+                        method.setOutline(o);
+                }
+                this.outService.addOrUpdate(o);
 
-            return "redirect:/";
+                return "redirect:/";
             } catch (Exception ex) {
                 System.err.println(ex.getMessage());
             }
