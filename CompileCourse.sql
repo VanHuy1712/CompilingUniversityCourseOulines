@@ -57,7 +57,7 @@ CREATE TABLE `comment` (
   KEY `fk_comment_outline1_idx` (`outline_id`),
   CONSTRAINT `fk_comment_outline1` FOREIGN KEY (`outline_id`) REFERENCES `outline` (`id`),
   CONSTRAINT `fk_comment_user1` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_vietnamese_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_vietnamese_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -66,7 +66,7 @@ CREATE TABLE `comment` (
 
 LOCK TABLES `comment` WRITE;
 /*!40000 ALTER TABLE `comment` DISABLE KEYS */;
-INSERT INTO `comment` VALUES (1,'Great course!','2024-01-15 10:30:00',1,1),(2,'Very helpful.','2024-02-20 11:45:00',2,2),(3,'Needs more examples.','2024-03-12 09:00:00',3,3);
+INSERT INTO `comment` VALUES (1,'Great course!','2024-01-15 10:30:00',1,1),(2,'Very helpful.','2024-02-20 11:45:00',2,2),(3,'Needs more examples.','2024-03-12 09:00:00',3,3),(4,'asdfgh123456','2024-06-27 20:58:56',14,1),(5,'1','2024-06-27 22:11:40',1,1),(6,'123','2024-06-27 22:13:46',1,1),(7,'abcdefg','2024-06-27 22:17:14',11,1);
 /*!40000 ALTER TABLE `comment` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -170,7 +170,7 @@ CREATE TABLE `outline` (
   KEY `fk_outline_course1_idx` (`course_id`),
   CONSTRAINT `fk_outline_course1` FOREIGN KEY (`course_id`) REFERENCES `course` (`id`),
   CONSTRAINT `fk_outline_user` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_vietnamese_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_vietnamese_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -179,7 +179,7 @@ CREATE TABLE `outline` (
 
 LOCK TABLES `outline` WRITE;
 /*!40000 ALTER TABLE `outline` DISABLE KEYS */;
-INSERT INTO `outline` VALUES (1,'2024-01-01 00:00:00','Vietnamese','Trực tiếp','Kiến thức ngành',3,'- Sinh viên tham gia đầy đủ các buổi học lý thuyết và thực hành.\n- Sinh viên tham gia đầy đủ các hoạt động học tập trên hệ thống LMS theo yêu cầu của GV.','- Nhận thức được tầm quan trọng của môn học.\n- Có khả năng tự học, tự trao dồi kiến thức.\n- Yêu thích các môn học lập trình và thích khám phá những bài toán khó.','Môn Kỹ Thuật Lập Trình trang bị cho sinh viên một số kiến thức tiếp theo của lập trình cấu trúc mà chưa được đề cập trong môn Cơ sở lập trình. Nội dung môn học bao gồm: mảng nhiều chiều, đệ qui, con trỏ, chuỗi ký tự, các kiểu dữ liệu tự tạo và các thao tác với tập tin. Ngôn ngữ lập trình được dùng để minh hoạ là C++.',13,1),(2,'2024-01-02 00:00:00','English','Kết hợp','Kiến thức ngành',4,'Policy 2','Objectives 2','Description 2',11,2),(3,'2024-01-03 00:00:00','French','Trực tuyến','Kiến thức ngành',2,'Policy 3','Objectives 3','Description 3',12,3);
+INSERT INTO `outline` VALUES (1,'2024-01-01 00:00:00','Vietnamese','Trực tiếp','Kiến thức ngành',3,'- Sinh viên tham gia đầy đủ các buổi học lý thuyết và thực hành.\n- Sinh viên tham gia đầy đủ các hoạt động học tập trên hệ thống LMS theo yêu cầu của GV.','- Nhận thức được tầm quan trọng của môn học.\n- Có khả năng tự học, tự trao dồi kiến thức.\n- Yêu thích các môn học lập trình và thích khám phá những bài toán khó.','Môn Kỹ Thuật Lập Trình trang bị cho sinh viên một số kiến thức tiếp theo của lập trình cấu trúc mà chưa được đề cập trong môn Cơ sở lập trình. Nội dung môn học bao gồm: mảng nhiều chiều, đệ qui, con trỏ, chuỗi ký tự, các kiểu dữ liệu tự tạo và các thao tác với tập tin. Ngôn ngữ lập trình được dùng để minh hoạ là C++.',13,1),(2,'2024-01-02 00:00:00','English','Kết hợp','Kiến thức ngành',4,'Policy 2','Objectives 2','Description 2',11,2),(3,'2024-01-03 00:00:00','French','Trực tuyến','Kiến thức ngành',2,'Policy 3','Objectives 3','Description 3',12,3),(4,'2024-06-25 13:10:39','Cáº£ hai','Káº¿t há»£p','Kiáº¿n thá»©c cÆ¡ sá»',2,'wsesxwicmw','asdfghjkl','asdfqwertyui',11,2);
 /*!40000 ALTER TABLE `outline` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -263,7 +263,7 @@ CREATE TABLE `user` (
   `avatar` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_vietnamese_ci DEFAULT NULL,
   `user_role` varchar(15) CHARACTER SET utf8mb4 COLLATE utf8mb4_vietnamese_ci DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_vietnamese_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_vietnamese_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -272,7 +272,7 @@ CREATE TABLE `user` (
 
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` VALUES (1,'Hao','Phan Van','nva@example.com','0123456789','nva','password1',_binary '','avatar1.png','ROLE_student'),(2,'Huy','Truong Van','ttb@example.com','0987654321','ttb','password2',_binary '','avatar2.png','ROLE_teacher'),(3,'Binh','Do Thanh','lmc@example.com','0111222333','lmc','password3',_binary '','avatar3.png','ROLE_admin'),(10,'dat','do thanh','abc@gmail.com','1234567890','dtd','$2a$10$6VVKXKOa3yy0fY3XFjSXqu1lIHXA5UvSZbtF6VXZGAPgtBaBKrDYq',_binary '','https://res.cloudinary.com/dn0kj5rfm/image/upload/v1718897574/aj4zia4w4djjauln7hvn.jpg','ROLE_student'),(11,'Hao','Phan Van','pvh@gmail.com','1112223330','pvh','$2a$10$himyLuuEctzHOkSr03BVzuZMARe3unnf1P0mYA4Uf4Vj51bQh8ACi',_binary '','https://res.cloudinary.com/dn0kj5rfm/image/upload/v1718897838/rk3iwzlymvmjnncbcamc.png','ROLE_teacher'),(12,'Huy','Truong Van','tvh@gmail.com','9998887770','tvh','$2a$10$zZwpcWovt2nzQprdLpNHp.HQ4jbecuojQ7ogHhR0jyZiGV9hHfycO',_binary '','https://res.cloudinary.com/dn0kj5rfm/image/upload/v1718897887/ptmnbn7je4kyxv3gtzwz.png','ROLE_admin'),(13,'Binh','Do Thanh','dtb@gmail.com','4445556660','dtb','$2a$10$Ig7TYO74YKeYWZLGBxOi3OQFmlSMOAwkR0wS6cUW7wZLdFXrZdJWG',_binary '','https://res.cloudinary.com/dn0kj5rfm/image/upload/v1718899844/zt6ezl9k09pafspep0m9.png','ROLE_student'),(14,'Modric','kroos','123@gmail.com','4445556660','test123','$2a$10$.sutotebOyFaq1/3a/vj9.hldTpPcT1enhQkAovzqqsWsQNXZxUZ2',_binary '','https://res.cloudinary.com/dn0kj5rfm/image/upload/v1718900653/wjg1jxt89ekfgghiuijf.jpg','ROLE_student');
+INSERT INTO `user` VALUES (1,'Hao','Phan Van','nva@example.com','0123456789','nva','password1',_binary '','avatar1.png','ROLE_student'),(2,'Huy','Truong Van','ttb@example.com','0987654321','ttb','password2',_binary '','avatar2.png','ROLE_teacher'),(3,'Binh','Do Thanh','lmc@example.com','0111222333','lmc','password3',_binary '','avatar3.png','ROLE_admin'),(10,'dat','do thanh','abc@gmail.com','1234567890','dtd','$2a$10$6VVKXKOa3yy0fY3XFjSXqu1lIHXA5UvSZbtF6VXZGAPgtBaBKrDYq',_binary '','https://res.cloudinary.com/dn0kj5rfm/image/upload/v1718897574/aj4zia4w4djjauln7hvn.jpg','ROLE_student'),(11,'Hao','Phan Van','pvh@gmail.com','1112223330','pvh','$2a$10$himyLuuEctzHOkSr03BVzuZMARe3unnf1P0mYA4Uf4Vj51bQh8ACi',_binary '','https://res.cloudinary.com/dn0kj5rfm/image/upload/v1718897838/rk3iwzlymvmjnncbcamc.png','ROLE_teacher'),(12,'Huy','Truong Van','tvh@gmail.com','9998887770','tvh','$2a$10$zZwpcWovt2nzQprdLpNHp.HQ4jbecuojQ7ogHhR0jyZiGV9hHfycO',_binary '','https://res.cloudinary.com/dn0kj5rfm/image/upload/v1718897887/ptmnbn7je4kyxv3gtzwz.png','ROLE_admin'),(13,'Binh','Do Thanh','dtb@gmail.com','4445556660','dtb','$2a$10$Ig7TYO74YKeYWZLGBxOi3OQFmlSMOAwkR0wS6cUW7wZLdFXrZdJWG',_binary '','https://res.cloudinary.com/dn0kj5rfm/image/upload/v1718899844/zt6ezl9k09pafspep0m9.png','ROLE_student'),(14,'Modric','kroos','123@gmail.com','4445556660','test123','$2a$10$.sutotebOyFaq1/3a/vj9.hldTpPcT1enhQkAovzqqsWsQNXZxUZ2',_binary '','https://res.cloudinary.com/dn0kj5rfm/image/upload/v1718900653/wjg1jxt89ekfgghiuijf.jpg','ROLE_student'),(15,'a','a','123@gmail.com','4445556660','a','$2a$10$648lfdapq1J8p4oXYebG8uJQ1DmqKflPu1LNRQE7QZzGvvl7ltYPi',_binary '','https://res.cloudinary.com/dn0kj5rfm/image/upload/v1719405888/k9rhulxkfksoeuflcrgo.jpg','ROLE_student'),(16,'abc123','xyz456','abc@gmail.com','1234567890','testabc','$2a$10$5IfP4XeoYkRT6LqNIlIOd.MnMv6GhxslO2s5Rd2/J67duaCOJDio.',_binary '','https://res.cloudinary.com/dn0kj5rfm/image/upload/v1719406622/kcxdwnelnmrqbla68vax.png','ROLE_student'),(22,'abc123','xyz456','abc@gmail.com','1234567890','testabc','$2a$10$tx9iNkeUWnZZmBYy6I0TJOH3nuL/DGvD134ZwClSvRlak7M4bGgMa',_binary '','https://res.cloudinary.com/dn0kj5rfm/image/upload/v1719406656/jxotdkc9dqr8dmkjerjb.png','ROLE_student'),(23,'abc1234','xyz4567','abc@gmail.com','1234567890','testabcd','$2a$10$1cKoUdNDKPXpBjAQBxaOfejIjHBPhiTAi9wUQZj8s78jEQCLe4kgu',_binary '','https://res.cloudinary.com/dn0kj5rfm/image/upload/v1719474020/gd6bzbt77x0zargn0doe.png','ROLE_student');
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -285,4 +285,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-06-21 12:00:28
+-- Dump completed on 2024-06-27 22:32:03

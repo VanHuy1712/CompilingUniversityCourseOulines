@@ -51,12 +51,12 @@ const OutlineDetails = () => {
         try {
             const commentData = {
                 content,
-                user: user.id,//{ id: user.id },
-                outline: outlineId//{ id: outlineId }
+                user: user.id,
+                outline: outlineId
             };
             await APIs.post(endpoints['create-comment'], commentData);
             setContent("");
-            loadOutline(); // Reload comments
+            loadOutline();
         } catch (ex) {
             console.error(ex);
         }
@@ -96,17 +96,6 @@ const OutlineDetails = () => {
                                 </tr>
                             </thead>
                             <tbody>
-                                {/* {outlineMethod.outline.id===outline.id?<MySpinner/>:<>
-                                    <tr>
-                                        <td>{outlineMethod.evaluationMethod.name}</td>
-                                        <td>{outlineMethod.name}</td>
-                                        <td>{outlineMethod.weight}%</td>
-                                    </tr>
-                                    </>}
-                                    <tr class="total">
-                                        <td colspan="2"><strong>Tổng cộng:</strong></td>
-                                        <td>{totalPercent + outlineMethod.weight} %</td>
-                                    </tr> */}
                                 {outlineMethod.map(method => (
                                     <tr key={method.id}>
                                         <td>{method.evaluationMethod.name}</td>
