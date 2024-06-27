@@ -45,9 +45,9 @@ public class OutlineTerm implements Serializable {
     @Column(name = "created_date")
     @Temporal(TemporalType.TIMESTAMP)
     private Date createdDate;
+    @NotNull(message = "{outlineTerm.academicId.NullErr}")
     @JoinColumn(name = "academic_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
-    @NotNull(message = "{outlineTerm.academicId.notNull}")
     private AcademicTerm academicId;
     @JoinColumn(name = "outline_id", referencedColumnName = "id")
     @ManyToOne(optional = false)

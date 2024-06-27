@@ -32,6 +32,7 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.Transient;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -103,7 +104,7 @@ public class Outline implements Serializable {
     @ManyToOne(optional = false)
 //    @JsonIgnore
     private User user;
-    @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER, mappedBy = "outline")
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "outline")
     @JsonIgnore
     private List<OutlineMethod> outlineMethodSet = new ArrayList<>();
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "outline")

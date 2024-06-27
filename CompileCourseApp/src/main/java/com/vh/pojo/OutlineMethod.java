@@ -17,6 +17,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 
@@ -41,11 +42,14 @@ public class OutlineMethod implements Serializable {
     @Column(name = "id")
     private Integer id;
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
+    @NotNull(message = "{outlineMethod.weight.nullErr}")
     @Column(name = "weight")
     private Double weight;
     @Size(max = 45)
+    @NotNull(message = "{outlineMethod.name.nullErr}")
     @Column(name = "name")
     private String name;
+    @NotNull(message = "{outlineMethod.evaluationMethod.NullErr}")
     @JoinColumn(name = "evaluation_method_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private EvaluationMethod evaluationMethod;

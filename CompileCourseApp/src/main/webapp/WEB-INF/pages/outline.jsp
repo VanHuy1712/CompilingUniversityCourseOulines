@@ -56,28 +56,28 @@
     <c:choose>
         <c:when test="${compilation.id > 0}">
             <div class="form-group mb-3 mt-3">
-        <label>Ngôn ngữ:</label><br>
-        <form:radiobutton path="language" value="Vietnamese" label="Vietnamese" checked="${compilation.language == 'Vietnamese'}"/>
-        <form:radiobutton path="language" value="English" label="English" checked="${compilation.language == 'English'}"/>
-        <form:radiobutton path="language" value="Both" label="Both" checked="${compilation.language == 'Both'}"/>
-    </div>
+                <label>Ngôn ngữ:</label><br>
+                <form:radiobutton path="language" value="Vietnamese" label="Vietnamese" checked="${compilation.language == 'Vietnamese'}"/>
+                <form:radiobutton path="language" value="English" label="English" checked="${compilation.language == 'English'}"/>
+                <form:radiobutton path="language" value="Both" label="Both" checked="${compilation.language == 'Both'}"/>
+            </div>
 
-    <div class="form-group mb-3 mt-3">
-        <label>Phương pháp giảng dạy:</label><br>
-        <form:radiobutton path="techingMethod" value="FTF" label="FTF" checked="${compilation.techingMethod == 'FTF'}"/>
-        <form:radiobutton path="techingMethod" value="Online" label="Online" checked="${compilation.techingMethod == 'Online'}"/>
-        <form:radiobutton path="techingMethod" value="Blended" label="Blended" checked="${compilation.techingMethod == 'Blended'}"/>
-    </div>
+            <div class="form-group mb-3 mt-3">
+                <label>Phương pháp giảng dạy:</label><br>
+                <form:radiobutton path="techingMethod" value="FTF" label="FTF" checked="${compilation.techingMethod == 'FTF'}"/>
+                <form:radiobutton path="techingMethod" value="Online" label="Online" checked="${compilation.techingMethod == 'Online'}"/>
+                <form:radiobutton path="techingMethod" value="Blended" label="Blended" checked="${compilation.techingMethod == 'Blended'}"/>
+            </div>
 
-    <div class="form-group mb-3 mt-3">
-        <label>Kiến thức:</label><br>
-        <form:radiobutton path="knowledge" value="General" label="General" checked="${compilation.knowledge == 'General'}"/>
-        <form:radiobutton path="knowledge" value="Foundation" label="Foundation" checked="${compilation.knowledge == 'Foundation'}"/>
-        <form:radiobutton path="knowledge" value="Discipline" label="Discipline" checked="${compilation.knowledge == 'Discipline'}"/>
-        <form:radiobutton path="knowledge" value="Major" label="Major" checked="${compilation.knowledge == 'Major'}"/>
-        <form:radiobutton path="knowledge" value="Additional" label="Additional" checked="${compilation.knowledge == 'Additional'}"/>
-        <form:radiobutton path="knowledge" value="GraduationThesis" label="Graduation Thesis" checked="${compilation.knowledge == 'GraduationThesis' || compilation.knowledge == 'Graduation Thesis'}"/>
-    </div>
+            <div class="form-group mb-3 mt-3">
+                <label>Kiến thức:</label><br>
+                <form:radiobutton path="knowledge" value="General" label="General" checked="${compilation.knowledge == 'General'}"/>
+                <form:radiobutton path="knowledge" value="Foundation" label="Foundation" checked="${compilation.knowledge == 'Foundation'}"/>
+                <form:radiobutton path="knowledge" value="Discipline" label="Discipline" checked="${compilation.knowledge == 'Discipline'}"/>
+                <form:radiobutton path="knowledge" value="Major" label="Major" checked="${compilation.knowledge == 'Major'}"/>
+                <form:radiobutton path="knowledge" value="Additional" label="Additional" checked="${compilation.knowledge == 'Additional'}"/>
+                <form:radiobutton path="knowledge" value="GraduationThesis" label="Graduation Thesis" checked="${compilation.knowledge == 'GraduationThesis' || compilation.knowledge == 'Graduation Thesis'}"/>
+            </div>
         </c:when>
         <c:otherwise>
             <div class="form-group mb-3 mt-3">
