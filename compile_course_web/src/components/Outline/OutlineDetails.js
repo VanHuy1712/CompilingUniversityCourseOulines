@@ -14,21 +14,22 @@ const OutlineDetails = () => {
     const { outlineId } = useParams();
     const [outlineMethod, setOutlineMethod] = useState(null);
     const [totalPercent, setTotalPercent] = useState(0);
-    const [comment, setComment] = useState(null);
+    const [comment, setComment] = useState([]);
 
     const loadOutline = async () => {
         try {
             let res = await APIs.get(endpoints['details'](outlineId));
             let med = await APIs.get(endpoints['outlineMethod']);
-            let comments = await APIs.get(endpoints['outline_comment'](outlineId));
+            // let comments = await APIs.get(endpoints['outline_comment'](outlineId));
+            let comments = await APIs.get(endpoints['get-comment']);
             setOutline(res.data);
 
             // Lọc các phương pháp đánh giá liên quan đến outline hiện tại
             const filteredMethods = med.data.filter(method => method.outline.id === res.data.id);
             setOutlineMethod(filteredMethods);
 
-            // const filterComments = comment.data.filter(comment => comment.outline.id === res.data.id);
-            setComment(comments.data);
+            const filterComments = comments.data.filter(comment => comment.outline.id === res.data.id);
+            setComment(filterComments);
 
             console.log(comments.data);
 
@@ -124,10 +125,12 @@ const OutlineDetails = () => {
                             </thead>
                             <tbody>
 
-                                <tr>
-                                    <td>{comment.user.lastName} {comment.user.firstName}</td>
-                                    <td>{comment.content}</td>
-                                </tr>
+                            {comment.map(c => (
+                                    <tr key={c.id}>
+                                        <td>{c.user.lastName} {c.user.firstName}</td>
+                                        <td>{c.content}</td>
+                                    </tr>
+                                ))}
 
                             </tbody>
                         </table>

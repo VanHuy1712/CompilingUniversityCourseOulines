@@ -12,7 +12,8 @@ export const endpoints = {
     'register': '/api/users/',
     'login': '/api/login/',
     'current-user': '/api/current-user/',
-    'create-comment': '/api/comments/'
+    'create-comment': '/api/comments/',
+    'get-comment': '/api/comments/'
 }
 
 export const authApi = () => {
