@@ -50,3 +50,6 @@
         <p><strong>Quy Định Môn Học:</strong> <br> <span>${outline.policy}</span> </p>
     </div>
 </div>
+
+
+<link rel="stylesheet" href="<c:url value="/css/styles.css" />" />

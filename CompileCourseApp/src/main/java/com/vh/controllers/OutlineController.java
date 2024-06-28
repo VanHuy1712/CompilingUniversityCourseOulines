@@ -83,6 +83,7 @@ public class OutlineController {
                 .mapToDouble(OutlineMethod::getWeight)
                 .sum();
 
+        // Kiểm tra nếu tổng trọng số khác 100
         if (Double.compare(totalWeight, 100.0) != 0) {
             rs.rejectValue("outlineMethodSet", "error.outlineMethodSet", "Tổng tỷ lệ phải bằng 100.");
             return "outline-list";
@@ -91,33 +92,32 @@ public class OutlineController {
 //            return "outline-list";
 //        }
 
-        try {
-            o.setCreateDate(new Date());
-            String username = principal.getName();
-            User currentUser = userService.getUserByUsername(username);
-            o.setUser(currentUser);
+            try {
+                o.setCreateDate(new Date());
+                String username = principal.getName();
+                User currentUser = userService.getUserByUsername(username);
+                o.setUser(currentUser);
 
-            for (OutlineTerm term : o.getOutlineTermSet()) {
-                term.setCreatedDate(new Date());
-                term.setOutlineId(o);
+                for (OutlineTerm term : o.getOutlineTermSet()) {
+                    term.setCreatedDate(new Date());
+                    term.setOutlineId(o);
+                }
+
+                for (OutlineMethod method : o.getOutlineMethodSet()) {
+                    method.setOutline(o);
+                }
+
+                this.outService.addOrUpdate(o);
+
+                return "redirect:/";
+            } catch (Exception ex) {
+                rs.reject("error.general", "Đã xảy ra lỗi khi lưu dữ liệu.");
+                return "outline-list";
             }
-
-            for (OutlineMethod method : o.getOutlineMethodSet()) {
-                method.setOutline(o);
-            }
-
-            this.outService.addOrUpdate(o);
-
-            return "redirect:/";
-        } catch (Exception ex) {
-            rs.reject("error.general", "Đã xảy ra lỗi khi lưu dữ liệu.");
-            return "outline-list";
         }
-    }
-
-    /**
-     * Kiểm tra các lỗi validation cho outlineTermSet trong Outline.
-     */
+        /**
+         * Kiểm tra các lỗi validation cho outlineTermSet trong Outline.
+         */
     private boolean hasValidationErrors(Outline outline, BindingResult rs) {
         boolean hasErrors = false;
         for (int i = 0; i < outline.getOutlineTermSet().size(); i++) {
@@ -153,7 +153,6 @@ public class OutlineController {
 //        }
 //        return hasErrors;
 //    }
-
 //    @RequestMapping("/sreachoutlines")
 //    public String sreachOutlineDetail(Model model, @RequestParam Map<String, String> params){
 //        
